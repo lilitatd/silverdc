@@ -15,6 +15,8 @@ class PlaneacionController extends Controller
     public function index()
     {
         //
+        $planeaciones = Planeacion::all();
+        return view('planeacions.index', compact('planeaciones'));
     }
 
     /**
@@ -26,7 +28,7 @@ class PlaneacionController extends Controller
     {
         //
         //return ('test');
-        return view('planeaciones.create');
+        return view('planeacions.create');
     }
 
     /**
@@ -69,9 +71,12 @@ class PlaneacionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Planeacion $planeacion)
     {
         //
+        //$planeacion = Planeacion::find($id);
+        //return ($planeacion);
+        return view('planeacions.show', compact('planeacion'));
     }
 
     /**
@@ -83,6 +88,8 @@ class PlaneacionController extends Controller
     public function edit($id)
     {
         //
+        $planeacion = Planeacion::find($id);
+        return view('planeacions.edit', compact('planeacion'));
     }
 
     /**
@@ -92,9 +99,16 @@ class PlaneacionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Planeacion $planeacion)
     {
+        //dd($planeacion->id);
+        //return $planeacion;
         //
+        //$planeacion = Planeacion::find($id);
+        $planeacion->fill($request->all());
+        $planeacion->estado='Nuevo';
+        $planeacion->save();
+        return 'planeacion fue actualizada';
     }
 
     /**
