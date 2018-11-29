@@ -3,6 +3,18 @@
 @section('title', ' - Planeaciones')
 
 @section('content')
+<<<<<<< Updated upstream
+=======
+	@if ($errors->any())
+		<div class="alert alert-danger">
+			<ul>
+				@foreach($errors->all() as $error)
+					<li>{{ $error }}</li>
+				@endforeach				
+			</ul>
+		</div>
+	@endif
+>>>>>>> Stashed changes
 	{!! Form::open(['route' => 'planeacions.store', 'method' => 'POST']) !!}
 		<div class="form-group">
 			{!! Form::label('nombre', 'Nombre') !!}

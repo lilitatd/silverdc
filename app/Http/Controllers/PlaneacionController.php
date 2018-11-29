@@ -39,18 +39,13 @@ class PlaneacionController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        /* 
-            $table->string('nombre', 20);   
-            $table->date('fecha');
-            $table->float('avanceTotal', 4, 2);
-            $table->float('avancePorDia', 4, 2);
-            $table->integer('diasTrabajo');
-            $table->integer('gestion');
-            $table->string('mes', 11);
-            $table->string('est', 15);
-            $table->string('estado', 10);
-        */            
+        $validatedData = $request->validate([
+            'nombre' => 'required',
+            'fecha' => 'required|date|after_or_equal:today',
+            'avanceTotal' => 'required',
+            'avancePorDia' => 'required',
+            'gestion' => 'required'
+        ]);          
         $planeacion = new Planeacion();
         $planeacion->nombre = $request->input('nombre');
         $planeacion->fecha = $request->input('fecha');
