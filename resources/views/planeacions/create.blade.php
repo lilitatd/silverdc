@@ -3,7 +3,7 @@
 @section('title', ' - Planeaciones')
 
 @section('content')
-	{!! Form::open(['route' => 'planeaciones.store', 'method' => 'POST']) !!}
+	{!! Form::open(['route' => 'planeacions.store', 'method' => 'POST']) !!}
 		<div class="form-group">
 			{!! Form::label('nombre', 'Nombre') !!}
 			{!! Form::text('nombre', null, ['class' => 'form-control']) !!}
