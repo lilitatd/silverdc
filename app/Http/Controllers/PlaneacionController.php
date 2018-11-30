@@ -57,7 +57,7 @@ class PlaneacionController extends Controller
         $planeacion->est = $request->input('est');
         $planeacion->estado = 'Pendiente';
         $planeacion->save();
-        return 'planeacion guardada';
+        return view('planeacions.saved');
     }
 
     /**
@@ -103,7 +103,7 @@ class PlaneacionController extends Controller
         $planeacion->fill($request->all());
         $planeacion->estado='Nuevo';
         $planeacion->save();
-        return 'planeacion fue actualizada';
+        return view('planeacions.updated');
     }
 
     /**
