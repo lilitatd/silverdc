@@ -3,6 +3,7 @@
 @section('title', ' - Lista de planeaciones')
 
 @section('content')
+	@include('common.success')
 	<div class="text-center"><h1>LISTA DE PLANEACIONES</h1></div>
 	<div class="text-right"><a href="/planeacions/create" class="w3-button w3-circle" style="background-color:#dbe8ff">+</a></div>
 	<table class="table table-bordered">

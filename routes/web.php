@@ -12,7 +12,12 @@
 */
 
 Route::get('/', function () {
-    return redirect('planeacions');
+    return view('welcome');
 });
 
 Route::resource('planeacions', 'PlaneacionController');
+Route::resource('labors', 'LaborController');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

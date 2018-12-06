@@ -3,6 +3,7 @@
 @section('title', ' - Planeaciones')
 
 @section('content')
+	@include('common.errors')
 	{!! Form::model($planeacion, ['route' => ['planeacions.update', $planeacion], 'method' => 'PUT']) !!}
 	<div class="form-group">
 			{!! Form::label('nombre', 'Nombre') !!}

@@ -4,6 +4,7 @@ namespace SilverDC\Http\Controllers;
 
 use SilverDC\Planeacion;
 use Illuminate\Http\Request;
+use SilverDC\Http\Requests\StorePlaneacionRequest;
 
 class PlaneacionController extends Controller
 {
@@ -12,9 +13,10 @@ class PlaneacionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        //return ($request);
+        $request->user()->authorizeRoles(['admin']);
         $planeaciones = Planeacion::all();
         return view('planeacions.index', compact('planeaciones'));
     }
@@ -37,15 +39,8 @@ class PlaneacionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        $validatedData = $request->validate([
-            'nombre' => 'required',
-            'fecha' => 'required|date|after_or_equal:today',
-            'avanceTotal' => 'required',
-            'avancePorDia' => 'required',
-            'gestion' => 'required'
-        ]);          
+    public function store(StorePlaneacionRequest $request)
+    {        
         $planeacion = new Planeacion();
         $planeacion->nombre = $request->input('nombre');
         $planeacion->fecha = $request->input('fecha');
@@ -57,7 +52,7 @@ class PlaneacionController extends Controller
         $planeacion->est = $request->input('est');
         $planeacion->estado = 'Pendiente';
         $planeacion->save();
-        return view('planeacions.saved');
+        return redirect()->route('planeacions.index')->with('status', 'Planeacion creada correctamente');
     }
 
     /**
@@ -103,7 +98,7 @@ class PlaneacionController extends Controller
         $planeacion->fill($request->all());
         $planeacion->estado='Nuevo';
         $planeacion->save();
-        return view('planeacions.updated');
+        return redirect()->route('planeacions.show', $planeacion)->with('status', 'Planeacion actualizada correctamente');
     }
 
     /**
@@ -112,8 +107,10 @@ class PlaneacionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Planeacion $planeacion)
     {
-        //
+        $planeacion->delete();
+
+        return redirect()->route('planeacions.index')->with('status', 'Planeacion eliminada correctamente');
     }
 }

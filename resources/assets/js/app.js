@@ -16,6 +16,10 @@ window.Vue = require('vue');
  */
 
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
+Vue.component('labors-component', require('./components/LaborsComponent.vue'));
+Vue.component('add-labor-btn', require('./components/AddLaborComponent.vue'));
+Vue.component('create-form-labor', require('./components/CreateLaborComponent.vue'));
+Vue.component('spinner', require('./components/Spinner.vue'));
 
 const app = new Vue({
     el: '#app'

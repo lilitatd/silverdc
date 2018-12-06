@@ -3,6 +3,7 @@
 @section('title', '- Planeación')
 
 @section('content')
+	@include('common.success')
 	<table class="table table-bordered">
 		<tbody>
 			<tr>
@@ -33,5 +34,9 @@
 	</table>
 	<div class="text-center">
 		<a href="/planeacions/{{$planeacion->id}}/edit" class="btn btn-primary">Editar</a>
+
+		{!! Form::open(['route' => ['planeacions.destroy', $planeacion->id], 'method' => 'DELETE']) !!}
+			{!! Form::submit('Eliminar', ['class' => 'btn btn-danger']) !!}
+		{!! Form::close() !!}
 	</div>
 @endsection
