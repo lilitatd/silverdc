@@ -13,21 +13,29 @@ class UserTableSeeder extends Seeder
      */
     public function run()
     {
-        $role_user = Role::where('name', 'user')->first();
-        $role_admin = Role::where('name', 'admin')->first();
+        $role_superAdmin = $this->getRole("SuperAdmin");
+        $role_admin = $this->getRole("Admin");
+        $role_seccional = $this->getRole("Seccional");
+        $role_supervisor = $this->getRole("Supervisor");
+        $role_polvorinero = $this->getRole("Polvorinero");
 
-        $user = new User();
-        $user->name = "User";
-        $user->email = "user@mail.com";
-        $user->password = bcrypt("userpass");
-        $user->save();
-        $user->roles()->attach($role_user);
+        $this->newUser("Super Admin Test", "superadmin@mail.com", "superadminP4ss", $role_superAdmin);
+        $this->newUser("Admin Test", "admin@mail.com", "adminP4ss", $role_admin);
+        $this->newUser("Seccional Test", "seccional@mail.com", "seccionalP4ss", $role_seccional);
+        $this->newUser("Supervisor Test", "supervisor@mail.com", "supervisorP4ss", $role_supervisor);
+        $this->newUser("Polvorinero Test", "polvorinero@mail.com", "polvorineroP4ss", $role_polvorinero);
+    }
 
+    private function getRole($role) {
+        return Role::where('name', $role)->first();
+    }
+
+    private function newUser($name, $email, $password, $role) {
         $user = new User();
-        $user->name = "Admin";
-        $user->email = "admin@mail.com";
-        $user->password = bcrypt("adminpass");
+        $user->name = $name;
+        $user->email = $email;
+        $user->password = bcrypt($password);
         $user->save();
-        $user->roles()->attach($role_admin);
+        $user->roles()->attach($role);
     }
 }
