@@ -59,5 +59,10 @@ class Kernel extends HttpKernel
         'guest' => \SilverDC\Http\Middleware\RedirectIfAuthenticated::class,
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
+        'SuperAdmin' => \SilverDC\Http\Middleware\SuperAdmin::class,
+        'Admin' => \SilverDC\Http\Middleware\Admin::class,
+        'Seccional' => \SilverDC\Http\Middleware\Seccional::class,
+        'Supervisor' => \SilverDC\Http\Middleware\Supervisor::class,
+        'Polvorinero' => \SilverDC\Http\Middleware\Polvorinero::class,
     ];
 }
