@@ -39,4 +39,54 @@
 			{!! Form::submit('Eliminar', ['class' => 'btn btn-danger']) !!}
 		{!! Form::close() !!}
 	</div>
+	<h1>Labores <a href="{{ url('labors/create') }}" class="btn btn-primary pull-right btn-sm">@lang('sylverdc.addnew') @lang('sylverdc.labor')</a></h1>
+    <div class="table">
+        <table class="table table-bordered table-striped table-hover">
+            <thead>
+            <tr>
+                <th>Nro</th>
+                <th>Código</th>
+                <th>Tipo</th>
+                <th>Veta</th>
+                <th>@lang('sylverdc.actions')</th>
+            </tr>
+            </thead>
+            <tbody>
+            @php $x=0; @endphp
+            @foreach($labors as $item)
+                @php $x++;@endphp
+                <tr>
+                    <td>{{ $x }}</td>
+                    <td><a href="{{ url('labor', $item->id) }}">{{ $item->codigo }}</a></td>
+                    <td>{{ $item->tipo }}</td>
+                    <td>{{ $item->veta }}</td>
+                    <td>
+                        <a href="{{ url('labors/' . $item->id . '/edit') }}">
+                            <button type="submit" class="btn btn-primary btn-xs">Editar</button>
+                        </a> /
+                        {!! Form::open([
+                            'method'=>'DELETE',
+                            'url' => ['labors', $item->id],
+                            'style' => 'display:inline',
+                            'onsubmit' => 'confirmDelete()'
+                        ]) !!}
+                        {!! Form::submit('Eliminar', ['class' => 'btn btn-danger btn-xs']) !!}
+                        {!! Form::close() !!}
+                    </td>
+                </tr>
+            @endforeach
+            </tbody>
+        </table>
+        <div class="pagination"> {!! $labors->render() !!} </div>
+    </div>
 @endsection
+<script>
+    function confirmDelete()
+  {
+  var x = confirm("Estas seguro de eliminar?");
+  if (x)
+    return true;
+  else
+    return false;
+  }
+</script>

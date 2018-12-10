@@ -11,6 +11,12 @@
 |
 */
 
+/*Route::filter('auth', function() {
+	if (Auth::guest()) {
+		return Redirect::guest('login');
+	}
+});*/
+
 Route::get('/', function () {
     return view('auth/login');
 });
@@ -34,8 +40,17 @@ Route::get('/Seccional', function() {
 	echo "Hello Seccional";
 })->middleware('auth', 'Seccional');
 Route::get('/Supervisor', function() {
-	echo "Hello Supervisor";
+	return redirect('planeacions');
 })->middleware('auth', 'Supervisor');
 Route::get('/Polvorinero', function() {
 	echo "Hello Polvorinero";
 })->middleware('auth', 'Polvorinero');
+
+Route::get('/test', function() {
+	$labor = SilverDC\Labor::findOrFail(1);
+
+	return $labor->planeacion;
+	/*$planeacion = SilverDC\Planeacion::findOrFail(1);
+
+	return $planeacion->labors;*/
+});

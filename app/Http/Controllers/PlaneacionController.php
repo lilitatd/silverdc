@@ -2,9 +2,12 @@
 
 namespace SilverDC\Http\Controllers;
 
+use SilverDC\Labor;
 use SilverDC\Planeacion;
 use Illuminate\Http\Request;
 use SilverDC\Http\Requests\StorePlaneacionRequest;
+use Auth;
+use Illuminate\Support\Facades\Session;
 
 class PlaneacionController extends Controller
 {
@@ -16,7 +19,7 @@ class PlaneacionController extends Controller
     public function index(Request $request)
     {
         //return ($request);
-        $request->user()->authorizeRoles(['admin']);
+        $request->user()->authorizeRoles(['SuperAdmin', 'Admin', 'Seccional', 'Supervisor']);
         $planeaciones = Planeacion::all();
         return view('planeacions.index', compact('planeaciones'));
     }
@@ -63,10 +66,12 @@ class PlaneacionController extends Controller
      */
     public function show(Planeacion $planeacion)
     {
-        //
-        //$planeacion = Planeacion::find($id);
-        //return ($planeacion);
-        return view('planeacions.show', compact('planeacion'));
+        if (!Auth::check()) {
+            return redirect('/');
+        }
+        Session::put('planeacion_id', $planeacion->id);
+        $labors = Labor::where('planeacion_id', '=', $planeacion->id)->paginate(15);
+        return view('planeacions.show', compact('planeacion', 'labors'));
     }
 
     /**

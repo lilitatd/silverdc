@@ -1,6 +1,7 @@
 <?php
 
 namespace SilverDC\Http\Middleware;
+use Auth;
 
 use Closure;
 

@@ -15,6 +15,7 @@ class CreateLaborsTable extends Migration
     {
         Schema::create('labors', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('planeacion_id')->unsigned();
             $table->string('codigo', 15);
             $table->string('tipo', 15);
             $table->integer('nivel');
@@ -24,6 +25,7 @@ class CreateLaborsTable extends Migration
             $table->integer('nroTaladros');
             $table->float('avanceTotal');
             $table->timestamps();
+            $table->foreign('planeacion_id')->references('id')->on('planeacions');
         });
     }
 
