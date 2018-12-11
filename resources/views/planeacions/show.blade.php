@@ -39,7 +39,7 @@
 			{!! Form::submit('Eliminar', ['class' => 'btn btn-danger']) !!}
 		{!! Form::close() !!}
 	</div>
-	<h1>Labores <a href="{{ url('labors/create') }}" class="btn btn-primary pull-right btn-sm">@lang('sylverdc.addnew') @lang('sylverdc.labor')</a></h1>
+	<h1>Labores <a href="{{ url('labors/create-step1') }}" class="btn btn-primary pull-right btn-sm">@lang('sylverdc.addnew') @lang('sylverdc.labor')</a></h1>
     <div class="table">
         <table class="table table-bordered table-striped table-hover">
             <thead>
@@ -83,7 +83,7 @@
 <script>
     function confirmDelete()
   {
-  var x = confirm("Estas seguro de eliminar?");
+  var x = confirm("¿Estas seguro de eliminar?");
   if (x)
     return true;
   else

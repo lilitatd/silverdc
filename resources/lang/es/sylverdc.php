@@ -7,7 +7,7 @@ return [
 	 * |-------------------------------------
 	 *
 	*/
-	'accions'	=> 'Acciones',
+	'actions'	=> 'Acciones',
 	'addnew'	=> 'Nuevo ',
 	'labor'		=> 'labor',
 ];

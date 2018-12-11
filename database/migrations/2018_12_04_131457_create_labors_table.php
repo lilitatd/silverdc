@@ -18,6 +18,7 @@ class CreateLaborsTable extends Migration
             $table->integer('planeacion_id')->unsigned();
             $table->string('codigo', 15);
             $table->string('tipo', 15);
+            $table->float('dureza');
             $table->integer('nivel');
             $table->string('veta', 25);
             $table->float('ancho');

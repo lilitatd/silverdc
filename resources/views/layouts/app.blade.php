@@ -19,6 +19,8 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/w3.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet">
 </head>
 <body>
     <div id="app">
@@ -48,7 +50,13 @@
                                 <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                             </li> -->
                         @else
+                            @if (Auth::user()->role == 'Supervisor')
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/planeacions">Planeaciones</a>
+                                </li>
+                            @endif
                             <li class="nav-item dropdown">
+                                <span class="glyphicon glyphicon-user"></span>
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>

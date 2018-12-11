@@ -18,15 +18,24 @@
 });*/
 
 Route::get('/', function () {
+	if (Auth::check()) {
+		return redirect('/'.Auth::user()->role);
+	}
     return view('auth/login');
 });
 
 Route::resource('planeacions', 'PlaneacionController');
-Route::resource('labors', 'LaborController');
+//Route::resource('labors', 'LaborController');
 
 Auth::routes();
-
 Route::get('/home', 'HomeController@index')->name('home');
+
+// Rutas para la creacion de labor
+Route::get('/labors/create-step1', 'LaborController@createStep1');
+Route::post('/labors/create-step1', 'LaborController@postCreateStep1');
+
+Route::get('/labors/create-step2', 'LaborController@createStep2');
+Route::post('/labors/create-step2', 'LaborController@postCreateStep2');
 
 
 // Redirecciones
