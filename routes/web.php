@@ -25,7 +25,7 @@ Route::get('/', function () {
 });
 
 Route::resource('planeacions', 'PlaneacionController');
-//Route::resource('labors', 'LaborController');
+Route::resource('articulos', 'ArticuloController');
 
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');

@@ -17,8 +17,8 @@ class CreatePlaneacionsTable extends Migration
             $table->increments('id');
             $table->string('nombre', 20);
             $table->date('fecha');
-            $table->float('avanceTotal', 4, 2);
-            $table->float('avancePorDia', 4, 2);
+            $table->float('avanceTotal', 4, 2)->default(0);
+            $table->float('avancePorDia', 4, 2)->default(0);
             $table->integer('diasTrabajo');
             $table->integer('gestion');
             $table->string('mes', 11);
