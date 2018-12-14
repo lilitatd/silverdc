@@ -24,19 +24,26 @@ Route::get('/', function () {
     return view('auth/login');
 });
 
-Route::resource('planeacions', 'PlaneacionController');
+Route::resource('planeacions', 'PlaneacionController')->middleware('auth');
+Route::get('/planeacions/{id}/revision', 'PlaneacionController@revision')->middleware('auth', 'Supervisor');
+Route::get('/planeacions/{id}/revision2', 'PlaneacionController@revision2')->middleware('auth', 'Supervisor');
+Route::get('/planeacions/{id}/boleta', 'PlaneacionController@boleta')->middleware('auth', 'Supervisor');
 Route::resource('articulos', 'ArticuloController');
 
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 // Rutas para la creacion de labor
-Route::get('/labors/create-step1', 'LaborController@createStep1');
+Route::get('labors/create-step1/{planeacion_id}', [
+    'as' => 'createlabors',
+    'uses' => 'LaborController@createStep1',
+]);
+//Route::get('/labors/create-step1', 'LaborController@createStep1');
 Route::post('/labors/create-step1', 'LaborController@postCreateStep1');
 
 Route::get('/labors/create-step2', 'LaborController@createStep2');
 Route::post('/labors/create-step2', 'LaborController@postCreateStep2');
-
+Route::post('/labors/delete', 'LaborController@destroy');
 
 // Redirecciones
 Route::get('/SuperAdmin', function() {
@@ -45,9 +52,9 @@ Route::get('/SuperAdmin', function() {
 Route::get('/Admin', function() {
 	echo "Hello Admin";
 })->middleware('auth', 'Admin');
-Route::get('/Seccional', function() {
-	echo "Hello Seccional";
-})->middleware('auth', 'Seccional');
+Route::get('/Seccional', 'SeccionalController@index')->middleware('auth', 'Seccional');
+Route::get('/seccional/{id}', 'SeccionalController@show')->middleware('auth', 'Seccional');
+Route::get('/seccional/{id}/aprobar', 'SeccionalController@aprobar')->middleware('auth', 'Seccional');
 Route::get('/Supervisor', function() {
 	return redirect('planeacions');
 })->middleware('auth', 'Supervisor');

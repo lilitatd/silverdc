@@ -25,10 +25,9 @@ class StorePlaneacionRequest extends FormRequest
     {
         return [
             'nombre' => 'required',
-            'fecha' => 'required|date|after_or_equal:today',
-            'avanceTotal' => 'required',
-            'avancePorDia' => 'required',
-            'gestion' => 'required'
+            'diasTrabajo' => 'required',
+            'gestion' => 'required',
+            'mes' => 'required',
         ];
     }
 }

@@ -14,7 +14,7 @@ class ArticuloTableSeeder extends Seeder
     public function run()
     {
         $this->newItem('1010', 'Anfo', 'Kg', 10, 12, Carbon::now(), 0);
-        $this->newItem('1020', 'Dinamita 7/8\"x8\"', 'Pza', 10, 12, Carbon::now(), 0);
+        $this->newItem('1020', 'Dinamita 7/8"x8"', 'Pza', 10, 12, Carbon::now(), 0);
         $this->newItem('1030', 'MS(tub+caps) detonante', 'Pza', 10, 12, Carbon::now(), 0);
         $this->newItem('1040', 'LP(tub+caps) detonante', 'Pza', 10, 12, Carbon::now(), 0);
         $this->newItem('1050', 'Cordón detonante 3P', 'm', 10, 12, Carbon::now(), 0);

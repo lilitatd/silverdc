@@ -1,6 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
+<button type="submit" class="btn btn-primary">Crear las {{ count($labors)}} boletas</button>
+    @foreach ($labors as $labor)
+    <br><br>
     <h1>Cálculo del número de taladros: {{ $planeacion->id }}</h1>
     <hr>
     <div class="container">
@@ -59,7 +62,7 @@
                 Número de taladros
             </div>
             <div class="col-sm">
-                {{ $labor->nroTaladros }}
+                {{ $labor->numeroTaladros }}
             </div>
             <div class="col-sm">
                 Cantidad de Anfo
@@ -83,6 +86,7 @@
             </div>
         </div>
     </div>
+
 
     <div>
     <table border="1">
@@ -136,7 +140,7 @@
     </table>
     </div>
         
-    <form action="/labors/create-step2" method="post">
+    <form action="/labors/create-ste" method="post">
         {{ csrf_field() }}
         <!-- Valores ocultos para el request -->
         {{ Form::hidden('planeacion_id', $planeacion->id) }}
@@ -147,10 +151,11 @@
         {{ Form::hidden('veta', $labor->veta) }}
         {{ Form::hidden('ancho', $labor->ancho) }}
         {{ Form::hidden('alto', $labor->alto) }}
-        {{ Form::hidden('nroTaladros', $labor->nroTaladros) }}
+        {{ Form::hidden('nroTaladros', $labor->numeroTaladros) }}
         {{ Form::hidden('cantidadAnfo', $labor->cantidadAnfo) }}
         {{ Form::hidden('avance', $labor->avance) }}
         {{ Form::hidden('avanceTotal', $labor->avanceTotal) }}
-        <button type="submit" class="btn btn-primary">Grabar: </button>
+        <button type="submit" class="btn btn-primary">Crear boleta</button>
     </form>
+    @endforeach
 @endsection

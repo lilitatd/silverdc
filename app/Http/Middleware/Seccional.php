@@ -3,6 +3,7 @@
 namespace SilverDC\Http\Middleware;
 
 use Closure;
+use Auth;
 
 class Seccional
 {

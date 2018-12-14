@@ -19,10 +19,13 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/w3.css') }}" rel="stylesheet">
     <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/w3.css') }}" rel="stylesheet">
+    <!--<link href="{{ asset('css/normalize.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/main.css') }}" rel="stylesheet">-->
 </head>
 <body>
+
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
             <div class="container">
@@ -53,6 +56,11 @@
                             @if (Auth::user()->role == 'Supervisor')
                                 <li class="nav-item">
                                     <a class="nav-link" href="/planeacions">Planeaciones</a>
+                                </li>
+                            @endif
+                            @if (Auth::user()->role == 'Seccional')
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/Seccional">Planeaciones pendientes</a>
                                 </li>
                             @endif
                             <li class="nav-item dropdown">

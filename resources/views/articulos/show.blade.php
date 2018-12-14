@@ -35,19 +35,9 @@
                             'method'=>'DELETE',
                             'url' => ['articulos', $articulo->id],
                             'style' => 'display:inline',
-                            'onsubmit' => 'confirmDelete()'
+                            'onsubmit' => 'return confirm("¿Estas seguro de eliminar?");'
             ]) !!}
         	{!! Form::submit('Eliminar', ['class' => 'btn btn-danger btn-xs']) !!}
         {!! Form::close() !!}
 	</div>
 @endsection
-<script>
-    function confirmDelete()
-  {
-  var x = confirm("¿Estas seguro de eliminar?");
-  if (x)
-    return true;
-  else
-    return false;
-  }
-</script>

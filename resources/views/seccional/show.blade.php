@@ -32,7 +32,7 @@
 			</tr>
 		</tbody>
 	</table>
-	<h1>Labores <a href="{{ url('labors/create-step1/'.$planeacion->id) }}" class="btn btn-primary pull-right btn-sm">@lang('sylverdc.addnew') @lang('sylverdc.labor')</a></h1>
+	<h1>Labores</h1>
     <div class="table">
         <table class="table table-bordered table-striped table-hover">
             <thead>
@@ -41,7 +41,7 @@
                 <th>Código</th>
                 <th>Tipo</th>
                 <th>Veta</th>
-                <th>@lang('sylverdc.actions')</th>
+                <!--<th>@lang('sylverdc.actions')</th>-->
             </tr>
             </thead>
             <tbody>
@@ -53,7 +53,7 @@
                     <td><a href="{{ url('labor', $item->id) }}">{{ $item->codigo }}</a></td>
                     <td>{{ $item->tipo }}</td>
                     <td>{{ $item->veta }}</td>
-                    <td>
+                    <!--<td>
                         <a href="{{ url('labors/' . $item->id . '/edit') }}">
                             <button type="submit" class="btn btn-primary btn-xs">Editar</button>
                         </a> /
@@ -64,12 +64,12 @@
                             {{ Form::hidden('labor_id', $item->id) }}
                         {!! Form::submit('Eliminar', ['class' => 'btn btn-danger btn-xs']) !!}
                         {!! Form::close() !!}
-                    </td>
+                    </td>-->
                 </tr>
             @endforeach
             </tbody>
         </table>
-        <div class="pagination"> {!! $labors->render() !!} </div>
+        
     </div>
 @endsection
 <script>

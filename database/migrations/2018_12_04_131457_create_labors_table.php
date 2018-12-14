@@ -24,9 +24,11 @@ class CreateLaborsTable extends Migration
             $table->float('ancho');
             $table->float('alto');
             $table->integer('nroTaladros');
+            $table->float('avance');
             $table->float('avanceTotal');
+            $table->float('cantidadAnfo');
             $table->timestamps();
-            $table->foreign('planeacion_id')->references('id')->on('planeacions');
+            $table->foreign('planeacion_id')->references('id')->on('planeacions')->onDelete('cascade');
         });
     }
 

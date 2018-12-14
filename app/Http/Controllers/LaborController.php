@@ -37,12 +37,12 @@ class LaborController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function createStep1(Request $request)
-    {
-        //return $request;
-        $labor = $request->session()->get('labor');
+    public function createStep1($planeacion_id)
+    {        
+        //$labor = $request->session()->get('labor');
         //$labor = null;
-        return view('labors.create-step1', compact('labor', $labor));
+        $planeacion = Planeacion::find($planeacion_id);
+        return view('labors.create-step1', compact('planeacion', $planeacion));
     }
 
     /**
@@ -55,51 +55,106 @@ class LaborController extends Controller
     {
         $validatedData = $request->validate([
             'codigo' => 'required|unique:labors',
-            'ancho' => 'required|numeric',
-            'alto' => 'required',
+            'planeacion_id' => 'required|numeric',
+            'tipo' => 'required',
             'dureza' => 'required',
         ]);
-        if(empty($request->session()->get('labor'))){
+        if (empty($request->session()->get('labor'))){
             $labor = new Labor();
             $labor->fill($validatedData);            
-        }else{
+        } else {
             $labor = $request->session()->get('labor');
             $labor->fill($validatedData);
         }
-        $area = $labor->ancho*$labor->alto;
-        $p = 4*sqrt($area);
-        $distanciaTaladros = 0;
-        $coeficienteRoca = 0;
-        switch ($labor->dureza) {
-            case 1:
-                $distanciaTaladros = 0.5;
-                $coeficienteRoca = 2;
+
+        // obteniendo valores del request
+        $planeacion_id = $request->input('planeacion_id');
+        $codigo = $request->input('codigo');
+        $nivel = $request->input('nivel');
+        $veta = $request->input('veta');
+        $tipo= $request->input('tipo');
+        $dureza = $request->input('dureza');
+        
+        $planeacion = Planeacion::find($planeacion_id);
+        //return $request;
+        //return $dureza;
+        $auxValues = $this->getAuxValues($tipo, $dureza, $planeacion);
+        //return $auxValues;
+        // rellenando los valores auxiliares a la labor
+        $labor->tipo = $tipo;
+        $labor->nivel = $nivel;
+        $labor->veta = $veta;
+        $labor->dureza = $dureza;
+        $labor->ancho = $auxValues['ancho'];
+        $labor->alto = $auxValues['alto'];
+        $labor->nroTaladros = $auxValues['nroTaladros'];
+        $labor->avance = round($auxValues['avance'], 2);
+        $labor->avanceTotal = round($auxValues['avanceTotal'], 2);
+        $labor->cantidadAnfo = round($auxValues['cantidadAnfo'], 2);
+        
+        $request->session()->put('labor', $labor);
+        return view('/labors.create-step2', compact('labor', $labor, 'auxValues', $auxValues, 'planeacion', $planeacion));
+    }
+
+    /**
+     * Funcion principal del cálculo de número de taladros
+     *
+     * @return variable de tipo objeto que contiene todos los valores auxiliares
+     */
+    private function getAuxValues($tipo, $dureza, $planeacion) {
+        $ancho = 0;
+        $alto = 0;
+        switch ($tipo) {
+            case 'D':
+                $ancho = 3;
+                $alto = 3;
                 break;
-            case 2:
-                $distanciaTaladros = 0.6;
-                $coeficienteRoca = 2.1;
+            case 'C':
+                $ancho = 1.5;
+                $alto = 1.5;
                 break;
-            case 3:
-                $distanciaTaladros = 0.7;
-                $coeficienteRoca = 2.2;
-                break;
-            case 4:
-                $distanciaTaladros = 0.8;
-                $coeficienteRoca = 2.3;
-                break;
+            case 'B':
+                $ancho = 1.5;
+                $alto = 1.8;
+                break;            
             default:
-                $distanciaTaladros = 0.9;
-                $coeficienteRoca = 2.4;
+                $ancho = 2.2;
+                $alto = 2.4;
                 break;
         }
-        $labor->numeroTaladros = round($p/$distanciaTaladros)+($coeficienteRoca*$area);
+
+        $area = $ancho * $alto;
+        $perimetro = 4 * sqrt($area);
+
+        $coeficienteRoca = 0;
+        if (($dureza == 0.5) || ($dureza == 0.55)) {
+            $coeficienteRoca = 2.0;
+        } elseif (($dureza == 0.6) || ($dureza == 0.65)) {
+            $coeficienteRoca = 1.5;
+        } else {                
+            $coeficienteRoca = 1.0;
+        }
+        $distanciaTaladros = (float)$dureza;
+
+        $numeroTaladros = round(($perimetro / $distanciaTaladros) + ($coeficienteRoca * $area));
+        
         $avance = sqrt($area);
-        $serie = $avance; // crear funcion para obtener la serie
-        $longitud = $serie*$avance; // Crear funcion para obtener longitud
-        $longitudANFO = (2/3) * $longitud;
-        $labor->avanceTotal = $avance;
-        $request->session()->put('labor', $labor);
-        return redirect('/labors/create-step2');
+
+        $ql = 7.854E-4*0.8*38.5;
+
+        $pesoAnfo = $ql * $area * (2 / 3);
+        $cantidadAnfo = $pesoAnfo * $numeroTaladros;
+
+        $auxValues = array(
+            'ancho' => $ancho,
+            'alto' => $alto,
+            'nroTaladros' => $numeroTaladros,
+            'avance' => $avance,
+            'cantidadAnfo' => $cantidadAnfo,
+            'avanceTotal' => $avance * $planeacion->diasTrabajo
+        );
+
+        return $auxValues;
     }
 
     /**
@@ -115,6 +170,36 @@ class LaborController extends Controller
         return view('labors.create-step2', compact('labor', $labor));
     }
 
+    /**
+     * Show the step 2 Form for creating a new labor.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function postCreateStep2(Request $request)
+    {
+        $planeacion_id = $request->input('planeacion_id');
+        $labor = new Labor();
+        $labor->planeacion_id = $planeacion_id;
+        $labor->codigo = $request->input('codigo');
+        $labor->tipo = $request->input('tipo');
+        $labor->nivel = $request->input('nivel');
+        $labor->veta = $request->input('veta');
+        $labor->ancho = $request->input('ancho');
+        $labor->alto = $request->input('alto');
+        $labor->dureza = $request->input('dureza');
+        $labor->nroTaladros = $request->input('nroTaladros');
+        $labor->avance = $request->input('avance');
+        $labor->avanceTotal = $request->input('avanceTotal');
+        $labor->cantidadAnfo = $request->input('cantidadAnfo');
+        $labor->save();
+
+        $planeacion = Planeacion::find($planeacion_id);
+        $planeacion->avanceTotal += $labor->avanceTotal;
+        $planeacion->avancePorDia = $planeacion->avanceTotal / $planeacion->diasTrabajo;
+        $planeacion->save(); 
+        return Redirect::action('PlaneacionController@show', [$planeacion_id])->with('status', 'Labor agregada correctamente');
+    }
+
     public function store(Request $request) {
         $planeacion_id = $request->input('planeacion_id');
         $labor = new Labor();
@@ -125,10 +210,18 @@ class LaborController extends Controller
         $labor->veta = $request->input('veta');
         $labor->ancho = $request->input('ancho');
         $labor->alto = $request->input('alto');
-        $labor->nroTaladros=0;
-        $labor->avanceTotal=0;
+        $labor->dureza = $request->input('dureza');
+        $labor->nroTaladros = $request->input('nroTaladros');
+        $labor->avance = $request->input('avance');
+        $labor->avanceTotal = $request->input('avanceTotal');
+        $labor->cantidadAnfo = $request->input('cantidadAnfo');
         $labor->save();
-        return Redirect::action('PlaneacionController@show', [$planeacion_id])->with('status', 'Labor creada correctamente');
+
+        $planeacion = Planeacion::find($planeacion_id);
+        $planeacion->avanceTotal += $labor->avanceTotal;
+        $planeacion->avancePorDia = $planeacion->avanceTotal / $planeacion->diasTrabajo;
+        $planeacion->save(); 
+        return Redirect::action('PlaneacionController@show', [$planeacion_id])->with('status', 'Labor agregada correctamente');
     }
 
     /**
@@ -137,10 +230,16 @@ class LaborController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Labor $labor)
+    public function destroy(Request $request)
     {
+        $labor = Labor::find($request->input('labor_id'));
         $planeacion_id = $labor->planeacion_id;
         $labor->delete();
+        //return $planeacion_id;
+        $planeacion = Planeacion::find($planeacion_id);
+        $planeacion->avanceTotal = $planeacion->getAvanceTotal();
+        $planeacion->avancePorDia = $planeacion->getAvancePorDia();
+        $planeacion->save();
 
         return Redirect::action('PlaneacionController@show', [$planeacion_id])->with('status', 'Labor eliminada correctamente');
     }

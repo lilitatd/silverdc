@@ -11,4 +11,17 @@ class Planeacion extends Model
     }
     //
     protected $fillable = ['nombre', 'fecha', 'avanceTotal', 'avancePorDia', 'diasTrabajo', 'gestion', 'mes', 'est'];
+
+    public function getAvanceTotal() {
+    	$labors = $this->labors();
+    	$avanceTotal = 0;
+    	foreach ($labors as $labor) {
+    		$avanceTotal += $labor->avanceTotal;
+    	}
+    	return $avanceTotal;
+    }
+
+    public function getAvancePorDia() {
+    	return $this->avanceTotal / $this->diasTrabajo;
+    }
 }

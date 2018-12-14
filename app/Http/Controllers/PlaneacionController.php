@@ -7,6 +7,7 @@ use SilverDC\Planeacion;
 use Illuminate\Http\Request;
 use SilverDC\Http\Requests\StorePlaneacionRequest;
 use Auth;
+use Carbon;
 use Illuminate\Support\Facades\Session;
 
 class PlaneacionController extends Controller
@@ -46,13 +47,20 @@ class PlaneacionController extends Controller
     {        
         $planeacion = new Planeacion();
         $planeacion->nombre = $request->input('nombre');
-        $planeacion->fecha = $request->input('fecha');
-        $planeacion->avanceTotal = $request->input('avanceTotal');
-        $planeacion->avancePorDia = $request->input('avancePorDia');
         $planeacion->diasTrabajo = $request->input('diasTrabajo');
         $planeacion->gestion = $request->input('gestion');
         $planeacion->mes = $request->input('mes');
-        $planeacion->est = $request->input('est');
+        // Contenido comentado porque valores no llegan del request
+        // $planeacion->fecha = $request->input('fecha');
+        // $planeacion->avanceTotal = $request->input('avanceTotal');
+        // $planeacion->avancePorDia = $request->input('avancePorDia');
+        // $planeacion->est = $request->input('est');
+
+        // Inicialización de valores
+        $planeacion->fecha = Carbon::now();
+        $planeacion->avanceTotal = 0;
+        $planeacion->avancePorDia = 0;
+        $planeacion->est = '--';
         $planeacion->estado = 'Pendiente';
         $planeacion->save();
         return redirect()->route('planeacions.index')->with('status', 'Planeacion creada correctamente');
@@ -117,5 +125,25 @@ class PlaneacionController extends Controller
         $planeacion->delete();
 
         return redirect()->route('planeacions.index')->with('status', 'Planeacion eliminada correctamente');
+    }
+
+    public function revision($id) {
+        $planeacion = Planeacion::find($id);
+        return view('planeacions.revision', compact('planeacion'));
+    }
+
+    public function revision2($id) {
+        //return $id;
+        $planeacion = Planeacion::find($id);
+        $planeacion->estado = 'Revision';
+        $planeacion->save();
+        return redirect()->route('planeacions.index')->with('status', 'Planeacion enviada a revision correctamente');
+    }
+
+    public function boleta($id) {        
+        $planeacion = Planeacion::find($id);
+        $labors = Labor::where('planeacion_id', '=', $id)->get();
+        //return $labors;
+        return view('boletas.create', compact('planeacion', 'labors'));
     }
 }
