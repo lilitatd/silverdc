@@ -62,7 +62,7 @@
                 Número de taladros
             </div>
             <div class="col-sm">
-                {{ $labor->numeroTaladros }}
+                {{ $labor->nroTaladros }}
             </div>
             <div class="col-sm">
                 Cantidad de Anfo

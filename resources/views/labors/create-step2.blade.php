@@ -151,6 +151,7 @@
         {{ Form::hidden('cantidadAnfo', $labor->cantidadAnfo) }}
         {{ Form::hidden('avance', $labor->avance) }}
         {{ Form::hidden('avanceTotal', $labor->avanceTotal) }}
+        {{ Form::hidden('ejecutor', $labor->ejecutor) }}
         <button type="submit" class="btn btn-primary">Grabar: </button>
     </form>
 @endsection

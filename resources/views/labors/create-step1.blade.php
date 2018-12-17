@@ -40,7 +40,9 @@
                 '0.6' => 'Int. dura',
                 '0.55' => 'Dura',
                 '0.5' => 'Muy Dura']) 
-            !!}        
+            !!}
+            {!! Form::label('ejecutor', 'Ejecutor') !!}
+            {!!Form::select('ejecutor', $users_array, null) !!}
         </div>
         {{ Form::hidden('planeacion_id', $planeacion->id ) }}
         {!! Form::submit('Calcular', ['class' => 'btn btn-primary']) !!}

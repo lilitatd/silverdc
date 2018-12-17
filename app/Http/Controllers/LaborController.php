@@ -5,6 +5,7 @@ namespace SilverDC\Http\Controllers;
 use Illuminate\Http\Request;
 use SilverDC\Labor;
 use SilverDC\Planeacion;
+use SilverDC\User;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 
@@ -42,7 +43,13 @@ class LaborController extends Controller
         //$labor = $request->session()->get('labor');
         //$labor = null;
         $planeacion = Planeacion::find($planeacion_id);
-        return view('labors.create-step1', compact('planeacion', $planeacion));
+        $users = User::where('role', '=', 'Operador')->orderBy('name', 'asc')->get();
+        $users_array = [];
+        foreach ($users as $user) {
+            $users_array[$user->id] = $user->name;
+        }
+        //return $users_array;
+        return view('labors.create-step1', compact('planeacion', 'users_array'));
     }
 
     /**
@@ -54,10 +61,11 @@ class LaborController extends Controller
     public function postCreateStep1(Request $request)
     {
         $validatedData = $request->validate([
-            'codigo' => 'required|unique:labors',
+            'codigo' => 'required',
             'planeacion_id' => 'required|numeric',
             'tipo' => 'required',
             'dureza' => 'required',
+            'ejecutor' => 'required',
         ]);
         if (empty($request->session()->get('labor'))){
             $labor = new Labor();
@@ -74,6 +82,8 @@ class LaborController extends Controller
         $veta = $request->input('veta');
         $tipo= $request->input('tipo');
         $dureza = $request->input('dureza');
+        $user = User::find($request->input('ejecutor'));
+        $ejecutor = $user->name;
         
         $planeacion = Planeacion::find($planeacion_id);
         //return $request;
@@ -85,6 +95,7 @@ class LaborController extends Controller
         $labor->nivel = $nivel;
         $labor->veta = $veta;
         $labor->dureza = $dureza;
+        $labor->ejecutor = $ejecutor;
         $labor->ancho = $auxValues['ancho'];
         $labor->alto = $auxValues['alto'];
         $labor->nroTaladros = $auxValues['nroTaladros'];
@@ -191,6 +202,7 @@ class LaborController extends Controller
         $labor->avance = $request->input('avance');
         $labor->avanceTotal = $request->input('avanceTotal');
         $labor->cantidadAnfo = $request->input('cantidadAnfo');
+        $labor->ejecutor = $request->input('ejecutor');
         $labor->save();
 
         $planeacion = Planeacion::find($planeacion_id);

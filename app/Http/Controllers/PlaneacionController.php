@@ -78,7 +78,7 @@ class PlaneacionController extends Controller
             return redirect('/');
         }
         Session::put('planeacion_id', $planeacion->id);
-        $labors = Labor::where('planeacion_id', '=', $planeacion->id)->paginate(15);
+        $labors = Labor::where('planeacion_id', '=', $planeacion->id)->orderBy('tipo', 'asc')->paginate(15);
         return view('planeacions.show', compact('planeacion', 'labors'));
     }
 
@@ -104,12 +104,7 @@ class PlaneacionController extends Controller
      */
     public function update(Request $request, Planeacion $planeacion)
     {
-        //dd($planeacion->id);
-        //return $planeacion;
-        //
-        //$planeacion = Planeacion::find($id);
         $planeacion->fill($request->all());
-        $planeacion->estado='Nuevo';
         $planeacion->save();
         return redirect()->route('planeacions.show', $planeacion)->with('status', 'Planeacion actualizada correctamente');
     }

@@ -15,7 +15,7 @@ class SeccionalController extends Controller
 
     public function show($id) {
     	$planeacion = Planeacion::find($id);
-    	$labors = Labor::where('planeacion_id', '=', $id)->get();
+    	$labors = Labor::where('planeacion_id', '=', $id)->orderBy('tipo', 'asc')->get();
     	return view('/seccional.show', compact('planeacion', 'labors'));
     }
 

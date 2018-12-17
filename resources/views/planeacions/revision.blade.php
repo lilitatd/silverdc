@@ -9,7 +9,7 @@
 		<tbody>
 			<tr>
 				<th>Nombre</th>
-				<td>{{$planeacion->nombre}}</td>
+				<td>{{ $planeacion->nombre }}</td>
 			</tr>
 			<tr>
 				<th>Fecha</th>

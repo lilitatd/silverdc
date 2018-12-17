@@ -9,8 +9,12 @@ class Planeacion extends Model
     public function labors() {
         return $this->hasMany(Labor::class);
     }
+
+    public function boletas() {
+        return $this->hasMany(Boleta::class);
+    }
     //
-    protected $fillable = ['nombre', 'fecha', 'avanceTotal', 'avancePorDia', 'diasTrabajo', 'gestion', 'mes', 'est'];
+    protected $fillable = ['nombre', 'fecha', 'avanceTotal', 'avancePorDia', 'diasTrabajo', 'gestion', 'mes', 'est', 'ejecutor'];
 
     public function getAvanceTotal() {
     	$labors = $this->labors();

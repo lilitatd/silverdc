@@ -24,10 +24,22 @@ Route::get('/', function () {
     return view('auth/login');
 });
 
+
+/*
+ * -------------------------
+ * 		Planeaciones
+ * -------------------------
+ */
 Route::resource('planeacions', 'PlaneacionController')->middleware('auth');
 Route::get('/planeacions/{id}/revision', 'PlaneacionController@revision')->middleware('auth', 'Supervisor');
 Route::get('/planeacions/{id}/revision2', 'PlaneacionController@revision2')->middleware('auth', 'Supervisor');
 Route::get('/planeacions/{id}/boleta', 'PlaneacionController@boleta')->middleware('auth', 'Supervisor');
+
+/*
+ * -------------------------
+ * 		Artículos
+ * -------------------------
+ */
 Route::resource('articulos', 'ArticuloController');
 
 Auth::routes();
