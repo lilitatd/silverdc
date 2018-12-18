@@ -65,7 +65,7 @@
         </style>
     </head>
     <body>
-         <div><h1>validando uso github</h1></div><!-- Validando uso de GIT HUB -->
+         <div><h1>Validando uso github</h1></div><!-- Validando uso de GIT HUB -->
         <div><h1>SILVER DC</h1></div>
         <div class="flex-center position-ref full-height">
             @if (Route::has('login'))
