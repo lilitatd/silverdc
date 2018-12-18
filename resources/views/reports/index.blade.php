@@ -3,7 +3,7 @@
 @section('title', ' - Reporte')
 
 @section('content')
-	<div class="text-center">Reporte por precios</div>
+	<div class="text-center">--Reporte por precios --</div>
 	@include('common.errors')
 	<div class="row">
 		{{ Form::open ([
@@ -48,6 +48,11 @@
 			</tr>
 		</thead>
 		<tbody>
+			@php
+				$sumPrecioEstimado = 0;
+				$sumPrecio = 0;
+				$sumDiferencia = 0;
+			@endphp
 			@foreach ($auxDetalleBoletas as $detalleBoleta)
 				<tr>
 					<td>{{ $detalleBoleta['planeacion'] }}</td>
@@ -61,9 +66,23 @@
 					<td>{{ $detalleBoleta['precio'] }}</td>
 					<td>{{ $detalleBoleta['diferenciaPrecio'] }}</td>
 				</tr>
+				@php
+					$sumPrecioEstimado += $detalleBoleta['precioEstimado'];
+					$sumPrecio += $detalleBoleta['precio'];
+					$sumDiferencia += $detalleBoleta['diferenciaPrecio'];
+				@endphp
 			@endforeach
 		</tbody>
+		<tfoot>
+			<tr>
+				<th>Total</th>
+				<th>{{ $sumPrecioEstimado }}</th>
+				<th>{{ $sumPrecio }}</th>
+				<th>{{ $sumDiferencia }}</th>
+			</tr>
+		</tfoot>
 	</table>
+	fdsafsa
 @endsection
 
 <script type="text/javascript">
