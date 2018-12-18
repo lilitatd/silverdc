@@ -46,12 +46,11 @@ Route::get('/planeacions/{id}/boleta', 'PlaneacionController@boleta')->middlewar
  * 		Boletas
  * -------------------------
  */
-//Route::resource('boletas', 'BoletaController');
+Route::resource('boletas', 'BoletaController');
 Route::get('/boletas', 'BoletaController@index')->name('bolsearch');
 Route::get('/boletas/step1', 'BoletaController@createStep1');
 Route::post('/boletas/create/{id}', 'BoletaController@createAll');
-Route::get('/boletas/{id}', 'BoletaController@show')->middleware('auth', 'Polvorinero');
-Route::post('/boletas', 'BoletaController@update')->name('bolsave');
+Route::post('/pol/boletas', 'BoletaController@update')->name('bolsave');
 
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
