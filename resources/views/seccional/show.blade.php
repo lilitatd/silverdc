@@ -43,6 +43,7 @@
             <tbody>
             @php $x=0; $total = 0; 
                 $lastType = 'A';
+                $totalGral = 0;
             @endphp
             @foreach($labors as $item)
                 @php 
@@ -56,8 +57,10 @@
                         echo '<td>'.$total.'</td>';
                         echo "</tr>";
                         $total = 0;
+                        $lastType = $item->tipo;
                     }
                     $total += $item->avanceTotal;
+                    $totalGral += $item->avanceTotal;
                 @endphp
                 <tr>
                     <td>{{ $x }}</td>
@@ -76,6 +79,12 @@
                 echo "</tr>";
             @endphp
             </tbody>
+            <tfoot class="table-dark">
+                <tr>
+                    <td colspan="6">TOTAL</td>
+                    <td>{{ $totalGral }}</td>
+                </tr>
+            </tfoot>
         </table>
         
     </div>
