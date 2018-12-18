@@ -18,6 +18,7 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css"> -->
 
     <!-- Styles -->
+    <!-- <link href="{{ asset('css/main.min.css') }}" rel="stylesheet"> -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet">
     <link href="{{ asset('css/w3.css') }}" rel="stylesheet">
@@ -57,6 +58,9 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="/planeacions">Planeaciones</a>
                                 </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/boletas">Boletas</a>
+                                </li>
                             @endif
                             @if (Auth::user()->role == 'Seccional')
                                 <li class="nav-item">
@@ -90,6 +94,10 @@
         <main class="container">
             @yield('content')
         </main>
+
+<!--        <footer>
+            @include('includes.footer')
+        </footer> -->
     </div>
 </body>
 </html>

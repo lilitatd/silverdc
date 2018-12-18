@@ -140,6 +140,7 @@
         {{ csrf_field() }}
         <!-- Valores ocultos para el request -->
         {{ Form::hidden('planeacion_id', $planeacion->id) }}
+        {{ Form::hidden('diasTrabajo', $planeacion->diasTrabajo) }}
         {{ Form::hidden('codigo', $labor->codigo) }}
         {{ Form::hidden('tipo', $labor->tipo) }}
         {{ Form::hidden('dureza', $labor->dureza) }}
@@ -152,6 +153,6 @@
         {{ Form::hidden('avance', $labor->avance) }}
         {{ Form::hidden('avanceTotal', $labor->avanceTotal) }}
         {{ Form::hidden('ejecutor', $labor->ejecutor) }}
-        <button type="submit" class="btn btn-primary">Grabar: </button>
+        <button type="submit" class="btn btn-primary">Grabar</button>
     </form>
 @endsection

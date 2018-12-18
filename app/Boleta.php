@@ -13,4 +13,17 @@ class Boleta extends Model
     protected $fillable = [
     	'codigo', 'fecha', 'destino', 'ficha', 'uso', 'equipo', 'numeroSHP', 'autorizadoPor', 'recibidoPor', 'despachadoPor', 'procesadoPor', 'estado'
     ];
+
+    // Scope
+    public function scopeCodigo($query, $codigo) {
+    	if ($codigo) {
+    		return $query->where('codigo', 'LIKE', "%$codigo%");
+    	}
+    }
+
+    public function scopeRecibidoPor($query, $recibidoPor) {
+    	if ($recibidoPor) {
+    		return $query->where('recibidoPor', 'LIKE', "%$recibidoPor%");
+    	}
+    }   
 }

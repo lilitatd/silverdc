@@ -137,8 +137,11 @@ class PlaneacionController extends Controller
 
     public function boleta($id) {        
         $planeacion = Planeacion::find($id);
-        $labors = Labor::where('planeacion_id', '=', $id)->get();
-        //return $labors;
-        return view('boletas.create', compact('planeacion', 'labors'));
+        $labors = Labor::where('planeacion_id', '=', $id)->where('nroBoletas', '>', '0')->get();
+        $labors_array = [];
+        foreach ($labors as $labor) {
+            $labors_array[$labor->id] = $labor->codigo;
+        }
+        return view('boletas.create', compact('planeacion', 'labors', 'labors_array'));
     }
 }

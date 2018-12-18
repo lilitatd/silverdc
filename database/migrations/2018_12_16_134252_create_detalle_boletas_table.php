@@ -26,7 +26,8 @@ class CreateDetalleBoletasTable extends Migration
             $table->float('precioEstimado');
             $table->float('precio');
             $table->integer('diferenciaCantidad');
-            $table->float('diferenciaPrecio');            
+            $table->float('diferenciaPrecio');  
+            $table->string('estado');          
             $table->timestamps();
             $table->foreign('boleta_id')->references('id')->on('boletas')->onDelete('cascade');
         });

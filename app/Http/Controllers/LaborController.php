@@ -82,6 +82,7 @@ class LaborController extends Controller
         $veta = $request->input('veta');
         $tipo= $request->input('tipo');
         $dureza = $request->input('dureza');
+        $nroBoletas = $request->input('diasTrabajo');
         $user = User::find($request->input('ejecutor'));
         $ejecutor = $user->name;
         
@@ -96,6 +97,7 @@ class LaborController extends Controller
         $labor->veta = $veta;
         $labor->dureza = $dureza;
         $labor->ejecutor = $ejecutor;
+        $labor->nroBoletas = $nroBoletas;
         $labor->ancho = $auxValues['ancho'];
         $labor->alto = $auxValues['alto'];
         $labor->nroTaladros = $auxValues['nroTaladros'];
@@ -104,7 +106,7 @@ class LaborController extends Controller
         $labor->cantidadAnfo = round($auxValues['cantidadAnfo'], 2);
         
         $request->session()->put('labor', $labor);
-        return view('/labors.create-step2', compact('labor', $labor, 'auxValues', $auxValues, 'planeacion', $planeacion));
+        return view('/labors.create-step2', compact('labor', 'auxValues', 'planeacion'));
     }
 
     /**
@@ -203,6 +205,7 @@ class LaborController extends Controller
         $labor->avanceTotal = $request->input('avanceTotal');
         $labor->cantidadAnfo = $request->input('cantidadAnfo');
         $labor->ejecutor = $request->input('ejecutor');
+        $labor->nroBoletas = $request->input('diasTrabajo');
         $labor->save();
 
         $planeacion = Planeacion::find($planeacion_id);
@@ -227,6 +230,7 @@ class LaborController extends Controller
         $labor->avance = $request->input('avance');
         $labor->avanceTotal = $request->input('avanceTotal');
         $labor->cantidadAnfo = $request->input('cantidadAnfo');
+        $labor->nroBoletas = $request->input('diasTrabajo');
         $labor->save();
 
         $planeacion = Planeacion::find($planeacion_id);

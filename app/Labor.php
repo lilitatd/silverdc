@@ -11,6 +11,6 @@ class Labor extends Model
     }
 
     protected $fillable = [
-    	'codigo', 'nivel', 'veta', 'tipo', 'ancho', 'alto'
+    	'codigo', 'nivel', 'veta', 'tipo', 'ancho', 'alto', 'nroBoletas'
     ];
 }

@@ -28,6 +28,7 @@ class CreateLaborsTable extends Migration
             $table->float('avanceTotal');
             $table->float('cantidadAnfo');
             $table->string('ejecutor');
+            $table->integer('nroBoletas');
             $table->timestamps();
             $table->foreign('planeacion_id')->references('id')->on('planeacions')->onDelete('cascade');
         });

@@ -24,6 +24,12 @@ Route::get('/', function () {
     return view('auth/login');
 });
 
+/*
+ * -------------------------
+ * 		Artículos
+ * -------------------------
+ */
+Route::resource('articulos', 'ArticuloController');
 
 /*
  * -------------------------
@@ -37,10 +43,15 @@ Route::get('/planeacions/{id}/boleta', 'PlaneacionController@boleta')->middlewar
 
 /*
  * -------------------------
- * 		Artículos
+ * 		Boletas
  * -------------------------
  */
-Route::resource('articulos', 'ArticuloController');
+//Route::resource('boletas', 'BoletaController');
+Route::get('/boletas', 'BoletaController@index')->name('bolsearch');
+Route::get('/boletas/step1', 'BoletaController@createStep1');
+Route::post('/boletas/create/{id}', 'BoletaController@createAll');
+Route::get('/boletas/{id}', 'BoletaController@show')->middleware('auth', 'Polvorinero');
+Route::post('/boletas', 'BoletaController@update')->name('bolsave');
 
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
@@ -70,9 +81,9 @@ Route::get('/seccional/{id}/aprobar', 'SeccionalController@aprobar')->middleware
 Route::get('/Supervisor', function() {
 	return redirect('planeacions');
 })->middleware('auth', 'Supervisor');
-Route::get('/Polvorinero', function() {
-	echo "Hello Polvorinero";
-})->middleware('auth', 'Polvorinero');
+
+// Polvorinero
+Route::get('/Polvorinero', 'BoletaController@index')->middleware('auth', 'Polvorinero');
 
 Route::get('/test', function() {
 	$labor = SilverDC\Labor::findOrFail(1);
