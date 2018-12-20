@@ -54,7 +54,7 @@
     <div id="app">
 
         <div class="vertical-align">
-            <img class="img-fluid" src="{{ asset('images/banner-home__ScaleMaxWidthWzE4MDBd.jpg') }}" style="position: fixed; width: 100%;">
+            <img class="img-fluid" src="{{ asset('images/topo-map.png') }}" style="position: fixed; width: 100%; background-repeat: repeat;">
         </div>
     
         <!-- Authentication Links -->
