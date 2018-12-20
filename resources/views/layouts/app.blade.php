@@ -18,42 +18,71 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css"> -->
 
     <!-- Styles -->
-    <!-- <link href="{{ asset('css/main.min.css') }}" rel="stylesheet"> -->
+    <link href="{{ asset('css/main.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet">
     <link href="{{ asset('css/w3.css') }}" rel="stylesheet">
-    <!--<link href="{{ asset('css/normalize.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/main.css') }}" rel="stylesheet">-->
+    <!-- <link href="{{ asset('css/normalize.css') }}" rel="stylesheet"> -->
+    <!-- <link href="{{ asset('css/main.css') }}" rel="stylesheet"> -->
 </head>
 <body>
 
+    <style>
+        
+        .vertical-center {
+          min-height: 100%;  
+          min-height: 100vh; 
+          display: flex;
+          align-items: center;
+        }
+    
+    .button-pry{
+        font-family: "Oswald",sans-serif !important;
+        font-size: calc(.2vw + 1em);
+        /*font-family: "Asap",sans-serif;*/
+        /*font-size: calc(.2vw + 1.6em);
+        line-height: 1.5;*/
+    }
+
+    .label{
+        font-family: "Oswald",sans-serif !important;
+        font-size: calc(.1vw + 1em);
+    }
+
+    </style>
+ 
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
+        <div class="vertical-align">
+            <img class="img-fluid" src="{{ asset('images/banner-home__ScaleMaxWidthWzE4MDBd.jpg') }}" style="position: fixed; width: 100%;">
+        </div>
+    
+        <!-- Authentication Links -->
+        @guest
 
-                    </ul>
+                        <!-- <li class="nav-item">
+                            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                        </li> -->
+        @else
+            <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
+                <div class="container">
+                    <a class="navbar-brand nav-item dropdown link" href="{{ url('/') }}">
+                        {{ config('app.name', 'Laravel') }}
+                    </a>
+                    <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+                        <span class="navbar-toggler-icon"></span>
+                    </button> -->
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <!-- Left Side Of Navbar -->
+                        <ul class="navbar-nav mr-auto">
 
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
-                        <!-- Authentication Links -->
-                        @guest
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                            </li>
-                            <!-- <li class="nav-item">
-                                <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                            </li> -->
-                        @else
+                        </ul>
+
+                        <!-- Right Side Of Navbar -->
+                        <ul class="navbar-nav ml-auto">
                             @if (Auth::user()->role == 'Supervisor')
                                 <li class="nav-item">
                                     <a class="nav-link" href="/planeacions">Planeaciones</a>
@@ -85,13 +114,13 @@
                                     </form>
                                 </div>
                             </li>
-                        @endguest
-                    </ul>
+                        </ul>
+                    </div>
                 </div>
-            </div>
-        </nav>
-
-        <main class="container">
+            </nav> 
+        @endguest
+                
+        <main style="height: 100%;">
             @yield('content')
         </main>
 
