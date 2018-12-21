@@ -4,6 +4,8 @@
 
 @section('content')
 	@include('common.success')
+	<div class="col-md-12">	
+	
 	@if (count($planeaciones) > 0)
 		<div class="text-center"><h1>LISTA DE PLANEACIONES</h1></div>
 		<div class="text-right"><a href="/planeacions/create" class="w3-button w3-circle w3-black">+</a></div>
@@ -31,7 +33,9 @@
 					<td>
 						@if ($planeacion->estado == "Pendiente")
 						<div class="btn-group"> <a href="/planeacions/{{$planeacion->id}}" class="btn btn-primary">V</a>&nbsp;
-						<a href="/planeacions/{{$planeacion->id}}/edit" class="btn btn-primary">Ed</a>&nbsp;
+						<a href="/planeacions/{{$planeacion->id}}/edit">
+          					<span class="glyphicon glyphicon-pencil"></span>
+        				</a>&nbsp;
 						{!! Form::open([
 							'route' => ['planeacions.destroy', $planeacion->id], 
 							'method' => 'DELETE', 
@@ -54,14 +58,21 @@
 			</tbody>
 		</table>
 	@else
-		<div class="text-center">
-			<p>No existen planeaciones</p>
-			<p>Pulsa el botón (+) para crear una planeación</p>
+		<br>
+		<div class="row">
+			<div class="text-center col-sm-12 col-md-11">
+				<p>No existen planeaciones</p>
+				<p>Pulsa el botón (+) para crear una planeación</p>
+			</div>
+			<div class="text-right col-sm-12 col-md-1 vertical-center justify-content-sm-center">
+				<a href="/planeacions/create" style="color: blue;">
+		          <span class="glyphicon glyphicon-plus"> </span>
+		        </a>
+			</div>
 		</div>
-		<div class="text-right">
-			<a href="/planeacions/create" class="w3-button w3-circle w3-black">+</a>
-		</div>			
+					
 	@endif
+	</div>
 @endsection
 <script>
     function confirmDelete()
