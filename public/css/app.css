@@ -1940,6 +1940,32 @@ pre code {
   }
 }
 
+
+.table-fixed{
+  width: 100%;
+  background-color: #f3f3f3;
+  tbody{
+    max-height:150px !important;
+    overflow-y:auto;
+    width: 100%;
+    }
+  thead,tbody,tr,td,th{
+    display:block;
+  }
+  tbody{
+    td{
+      float:left;
+    }
+  }
+  thead {
+    tr{
+      th{
+        float:left;
+      }
+    }
+  }
+}
+
 .table {
   width: 100%;
   margin-bottom: 1rem;
@@ -1948,7 +1974,7 @@ pre code {
 
 .table th,
 .table td {
-  padding: 0.75rem;
+  /*padding: 0.75rem;*/
   vertical-align: top;
   border-top: 1px solid #dee2e6;
 }

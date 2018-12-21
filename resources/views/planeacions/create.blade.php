@@ -4,6 +4,7 @@
 
 @section('content')
 	@include('common.errors')
+	<br><br>
 	<div class="col-md-12">
 	{!! Form::open(['route' => 'planeacions.store', 'method' => 'POST']) !!}
 		<div class="form-group">
@@ -30,8 +31,9 @@
 		</div>
 			<!--{!! Form::label('est', 'Est') !!}
 			{!! Form::text('est', null, ['class' => 'form-control']) !!}-->
-		</div>
+		
 		{!! Form::submit('Guardar', ['class' => 'btn btn-primary']) !!}
 	{!! Form::close() !!}
+	</div>
 	</div>
 @endsection
