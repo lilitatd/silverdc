@@ -25,7 +25,7 @@
 		<br>
 		<div class="row">
 			<div class="col-sm-12 col-md-12 col-lg-12 table-responsive">
-				<table class="table-bordered table table-fixed" style="min-width: 720px;">
+				<table class="table-bordered table table-fixed" style="">
 					<thead>
 						<tr>
 							<td>Nombre</td>
@@ -48,7 +48,7 @@
 							<td>{{$planeacion->mes}}</td>
 							<td>
 								@if ($planeacion->estado == "Pendiente")
-								<div class="btn-group"> <a href="/planeacions/{{$planeacion->id}}" class="btn btn-primary">V</a>&nbsp;
+								<div class="btn-group"> <a href="/planeacions/{{$planeacion->id}}"><i class="glyphicon glyphicon-eye-open"></i></a>&nbsp;&nbsp;
 								<a href="/planeacions/{{$planeacion->id}}/edit">
 		          					<i class="glyphicon glyphicon-pencil" style="color: blue;"></i>
 		        				</a>&nbsp;
@@ -63,11 +63,11 @@
 								]) !!}
 									&nbsp;<a href="#" onclick="$('#el_sbmt').submit();"><i class="glyphicon glyphicon-trash" style="color: red;"></i></a>
 								{!! Form::close() !!}
-									&nbsp;<a href="/planeacions/{{$planeacion->id}}/revision" class="">A</a>
+									&nbsp;<a href="/planeacions/{{$planeacion->id}}/revision" class=""><i class="glyphicon glyphicon-ok" style="color: green;"></i></a>
 								</div>
 								@endif
 								@if ($planeacion->estado == 'Aprobado')
-									<a href="/planeacions/{{$planeacion->id}}/boleta" class="btn btn-primary">B</a>
+									<a href="/planeacions/{{$planeacion->id}}/boleta"><i class="glyphicon glyphicon-list-alt" style="color: green;"></i></a>
 								@endif
 							</td>
 						</tr>
