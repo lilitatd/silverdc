@@ -152,6 +152,7 @@
         {{ Form::hidden('avance', $labor->avance) }}
         {{ Form::hidden('avanceTotal', $labor->avanceTotal) }}
         {{ Form::hidden('ejecutor', $labor->ejecutor) }}
+        {{ Form::hidden('diasTrabajo', $planeacion->diasTrabajo) }}
         <button type="submit" class="btn btn-primary">Grabar: </button>
     </form>
 @endsection
