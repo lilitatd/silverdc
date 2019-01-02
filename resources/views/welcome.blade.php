@@ -9,9 +9,9 @@
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
-        <!-- Styles -->
-        
+        <link rel="stylesheet" type="text/css" href="">
 
+        <!-- Styles -->
         <style>
             html, body {
                 background-color: #fff;
@@ -66,6 +66,7 @@
         </style>
     </head>
     <body>
+        <div><h1>validando uso github</h1></div><!-- Validando uso de GIT HUB -->
         <div><h1>SILVER DC</h1></div>
         <div class="flex-center position-ref full-height">
             @if (Route::has('login'))

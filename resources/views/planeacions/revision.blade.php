@@ -3,6 +3,7 @@
 @section('title', '- Planeación')
 
 @section('content')
+	<br>
     <div class="text-center"><h2>APROBAR PLANEACION</h2></div>
 	@include('common.success')
 	<table class="table table-bordered">

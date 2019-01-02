@@ -3,6 +3,7 @@
 @section('title', '- Planeación')
 
 @section('content')
+<br>
 	@include('common.success')
     <div class="text-center"><h2>Planeación: {{$planeacion->nombre}} </h2></div>
     <div class="container">
@@ -25,9 +26,15 @@
             <div class="col">{{$planeacion->mes}}</div>
         </div>
     </div>
+    <br>
 	<h1>Labores</h1>
     <div class="table">
-        <table class="table table-bordered table-striped">
+    <div class="row">
+        <div class="col-sm-12 col-md-12">
+            
+        </div>
+    </div>
+        <table class="table table-bordered" style="width: 100%;" id="planeacion_lbrs">
             <thead>
             <tr>
                 <th>Nro</th>
@@ -43,7 +50,6 @@
             <tbody>
             @php $x=0; $total = 0; 
                 $lastType = 'A';
-                $totalGral = 0;
             @endphp
             @foreach($labors as $item)
                 @php 
@@ -53,14 +59,17 @@
                     }
                     if ($lastType != $item->tipo) {
                         echo "<tr>";
-                        echo '<td colspan=6>Total</td>';
+                        echo '<td colspan="6">Total</td>';
+                        echo '<td style="display: none;"></td>';
+                        echo '<td style="display: none;"></td>';
+                        echo '<td style="display: none;"></td>';
+                        echo '<td style="display: none;"></td>';
+                        echo '<td style="display: none;"></td>';
                         echo '<td>'.$total.'</td>';
                         echo "</tr>";
                         $total = 0;
-                        $lastType = $item->tipo;
                     }
                     $total += $item->avanceTotal;
-                    $totalGral += $item->avanceTotal;
                 @endphp
                 <tr>
                     <td>{{ $x }}</td>
@@ -74,17 +83,16 @@
             @endforeach
             @php 
                 echo "<tr>";
-                echo '<td colspan=6>Total</td>';
+                echo '<td colspan="6">Total</td>';
+                echo '<td style="display: none;"></td>';
+                echo '<td style="display: none;"></td>';
+                echo '<td style="display: none;"></td>';
+                echo '<td style="display: none;"></td>';
+                echo '<td style="display: none;"></td>';
                 echo '<td>'.$total.'</td>';
                 echo "</tr>";
             @endphp
             </tbody>
-            <tfoot class="table-dark">
-                <tr>
-                    <td colspan="6">TOTAL</td>
-                    <td>{{ $totalGral }}</td>
-                </tr>
-            </tfoot>
         </table>
         
     </div>

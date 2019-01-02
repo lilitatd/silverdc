@@ -4,6 +4,7 @@
 
 @section('content')
 	@include('common.success')
+    <br>
 	<table class="table table-bordered">
 		<tbody>
 			<tr>
@@ -34,7 +35,9 @@
 	</table>
 	<h1>Labores <a href="{{ url('labors/create-step1/'.$planeacion->id) }}" class="btn btn-primary pull-right btn-sm">@lang('sylverdc.addnew') @lang('sylverdc.labor')</a></h1>
     <div class="table">
-        <table class="table table-bordered table-striped table-hover">
+        <div class="row">
+            <div class="col-md-12 col-sm-12">
+                <table class="table table-bordered" style="width: 100%;" id="ver_lbrs">
             <thead>
             <tr>
                 <th>Nro</th>
@@ -69,6 +72,9 @@
             @endforeach
             </tbody>
         </table>
+            </div>
+        </div>
+        
         <div class="pagination"> {!! $labors->render() !!} </div>
     </div>
 @endsection
