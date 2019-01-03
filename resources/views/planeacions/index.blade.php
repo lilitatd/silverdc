@@ -37,7 +37,7 @@
 			</thead>
 			<tbody>
 				@foreach($planeaciones as $planeacion)
-				<tr @if ($planeacion->estado == 'Aprobado') bgcolor="#cdf7e3" @endif>
+				<tr @if ($planeacion->estado == 'Aprobado') style="background-color: #cdf7e3;" @endif>
 					<td>{{$planeacion->nombre}}</td>
 					<td>{{$planeacion->fecha}}</td>
 					<td>{{$planeacion->avanceTotal}}</td>
