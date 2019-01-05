@@ -117,22 +117,27 @@ class LaborController extends Controller
     private function getAuxValues($tipo, $dureza, $planeacion) {
         $ancho = 0;
         $alto = 0;
+        $promDiametro = 0;
         switch ($tipo) {
             case 'D':
                 $ancho = 3;
                 $alto = 3;
+                $promDiametro = 38;
                 break;
             case 'C':
                 $ancho = 1.5;
                 $alto = 1.5;
+                $promDiametro = 39.3;
                 break;
             case 'B':
                 $ancho = 1.5;
-                $alto = 1.8;
+                $alto = 1.9;
+                $promDiametro = 39.5;
                 break;            
             default:
                 $ancho = 2.2;
                 $alto = 2.4;
+                $promDiametro = 38.5;
                 break;
         }
 
@@ -153,9 +158,9 @@ class LaborController extends Controller
         
         $avance = sqrt($area);
 
-        $ql = 7.854E-4*0.8*38.5;
+        $ql = 7.854E-4 * 0.8 * ($promDiametro * $promDiametro);
 
-        $pesoAnfo = $ql * $area * (2 / 3);
+        $pesoAnfo = $ql * $alto * (2 / 3);
         $cantidadAnfo = $pesoAnfo * $numeroTaladros;
 
         $auxValues = array(
