@@ -47,12 +47,12 @@
             <div class="col-md-4 col-sm-12 form-group">
             {!! Form::label('dureza', 'Dureza de la roca') !!}
             {!! Form::select('dureza', 
-                ['0.75' => 'Muy blanda',
-                '0.7' => 'Blanda',
-                '0.65' => 'Int. blanda', 
-                '0.6' => 'Int. dura',
-                '0.55' => 'Dura',
-                '0.5' => 'Muy Dura'],null,['class' => 'form-control']) 
+                ['0.75' => 'Muy blanda (0.75)',
+                '0.7' => 'Blanda (0.70)',
+                '0.65' => 'Int. blanda (0.65)', 
+                '0.6' => 'Int. dura (0.6)',
+                '0.55' => 'Dura (0.55)',
+                '0.5' => 'Muy Dura (0.5)'],null,['class' => 'form-control']) 
             !!}
             </div>
             <div class="col-sm-12 col-md-4 form-group">
