@@ -1,9 +1,9 @@
 <?php
 
 namespace SilverDC\Http\Middleware;
-use Auth;
 
 use Closure;
+use Illuminate\Support\Facades\Auth;
 
 class Polvorinero
 {
@@ -19,13 +19,13 @@ class Polvorinero
         if (Auth::check() && Auth::user()->role == 'Polvorinero') {
             return $next($request);
         } elseif (Auth::check() && Auth::user()->role == 'Admin') {
-            return redirect('/admin');
+            return redirect('/Admin');
         } elseif (Auth::check() && Auth::user()->role == 'Seccional') {
-            return redirect('/seccional');
+            return redirect('/Seccional');
         } elseif (Auth::check() && Auth::user()->role == 'Supervisor') {
-            return redirect('/supervisor');
+            return redirect('/Supervisor');
         } else {
-            return redirect('/superadmin');
+            return redirect('/Superadmin');
         }
     }
 }

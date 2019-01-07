@@ -3,7 +3,7 @@
 namespace SilverDC\Http\Middleware;
 
 use Closure;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 
 class SuperAdmin
 {
@@ -19,13 +19,13 @@ class SuperAdmin
         if (Auth::check() && Auth::user()->role == 'SuperAdmin') {
             return $next($request);
         } elseif (Auth::check() && Auth::user()->role == 'Admin') {
-            return redirect('/admin');
+            return redirect('/Admin');
         } elseif (Auth::check() && Auth::user()->role == 'Seccional') {
-            return redirect('/seccional');
+            return redirect('/Seccional');
         } elseif (Auth::check() && Auth::user()->role == 'Supervisor') {
-            return redirect('/supervisor');
+            return redirect('/Supervisor');
         } else {
-            return redirect('/polvorinero');
+            return redirect('/Polvorinero');
         }
         
     }

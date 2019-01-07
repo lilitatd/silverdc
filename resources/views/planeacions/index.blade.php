@@ -52,7 +52,7 @@
 							'route' => ['planeacions.destroy', $planeacion->id], 
 							'method' => 'DELETE', 
 							'class' => 'form-inline', 
-							'onsubmit' => 'confirmDelete()',
+							'onsubmit' => 'return confirmDelete()',
 							'style'=>'display: none;',
 							'id'=>'form_1'
 						]) !!}

@@ -4,13 +4,25 @@
 
 @section('content')
 	@include('common.success')
+	@include('common.errors')
 	@if (count($articulos) > 0)
-		<div class="text-center">
-			<h1>LISTA DE MATERIALES</h1>			
+		<div class="row">
+			<div class="col-sm-12 col-md-12">
+				<div class="hero-element-mini">
+				<h1 class="hero-title white">Lista de materiales
+				</h1>
+				</div>
+			</div>
 		</div>
-		<div class="text-right">
-			<a href="/articulos/create" class="w3-button w3-circle w3-black">+</a>
+		<br>
+		<div class="row">
+			<div class="col d-flex justify-content-end">
+				<a href="/articulos/create" style="color: blue;" title="Crear usuario">
+		          <span class="fa fa-plus"> </span>
+		        </a>
+			</div>
 		</div>
+		<br>
 		<table class="table table-bordered">
 			<thead>
 				<tr>

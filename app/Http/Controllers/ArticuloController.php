@@ -102,6 +102,9 @@ class ArticuloController extends Controller
      */
     public function destroy(Articulo $articulo)
     {
+        if (in_array($articulo->nroArticulo, [1010, 1020, 1030, 1040, 1050, 1060, 1070])) {
+            return redirect()->route('articulos.index', $articulo)->withErrors(['El material seleccionado no puede ser eliminado']);
+        }
         $articulo->delete();
         return redirect()->route('articulos.index', $articulo)->with('status', 'Material eliminado correctamente');
     }

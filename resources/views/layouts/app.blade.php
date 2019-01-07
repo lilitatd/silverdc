@@ -35,6 +35,17 @@
                 <div class="header-right" style="height: 100px;">
                     <nav role="navigation" style="height: 100%;">
                         <ul class="nav-items" style="">
+                            @if ((Auth::user()->role == "SuperAdmin")
+                            || (Auth::user()->role == "Admin"))
+                                <li class="nav-item">
+                                    <a class="link-nav-item nav-link" href="/users">USUARIOS</a>
+                                </li>
+                                @if (Auth::user()->role == "Admin")
+                                    <li class="nav-item">
+                                        <a class="link-nav-item nav-link" href="/articulos">ARTICULOS</a>
+                                    </li>
+                                @endif
+                            @endif
                             @if (Auth::user()->role == 'Supervisor')
                                 <li class="nav-item" style="">
                                     <a class="link-nav-item nav-link" href="/planeacions">PLANEACIONES</a>
