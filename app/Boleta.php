@@ -9,9 +9,13 @@ class Boleta extends Model
     public function planeacion() {
     	return $this->belongsToMany('SilverDC\Planeacion');
     }
+
+    public function labor() {
+        return $this->belongsToMany('SilverDC\Labor');
+    }
     
     protected $fillable = [
-    	'codigo', 'fecha', 'destino', 'ficha', 'uso', 'equipo', 'numeroSHP', 'autorizadoPor', 'recibidoPor', 'despachadoPor', 'procesadoPor', 'estado'
+    	'codigo', 'fecha', 'turno', 'autorizadoPor', 'recibidoPor', 'despachadoPor', 'procesadoPor', 'estado'
     ];
 
     // Scope

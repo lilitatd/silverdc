@@ -64,13 +64,10 @@ class BoletaController extends Controller
         $labor = Labor::find($request->input('labor'));
         $boleta = new Boleta();
         $boleta->planeacion_id = $labor->planeacion_id;
+        $boleta->labor_id = $labor->id;
         $boleta->codigo = $request->input('codigo');
         $boleta->fecha = Carbon::now();
-        $boleta->destino = $request->input('destino');
-        $boleta->ficha = $request->input('ficha');
-        $boleta->uso = $request->input('uso');
-        $boleta->equipo = $request->input('equipo');
-        $boleta->numeroSHP = $request->input('numeroSHP');
+        $boleta->turno = $request->input('turno');
         $boleta->autorizadoPor = '-';
         $boleta->recibidoPor = $labor->ejecutor;
         $boleta->despachadoPor = '-';
@@ -82,9 +79,7 @@ class BoletaController extends Controller
 
         $this->storeItems($labor,
             $boleta,
-            $request->input('cuenta'),
-            $request->input('centro'),
-            $request->input('subCentro'));
+            $request->input('turno'));
 
         $labors = Labor::where('planeacion_id', '=', $labor->planeacion_id)->where('nroBoletas', '>', '0')->get();
 
@@ -95,80 +90,64 @@ class BoletaController extends Controller
         return redirect()->route('planeacions.index')->with('status', 'Boleta creada correctamente');
     }
 
-    public function storeItems($labor, $boleta, $cuenta, $centro, $subCentro) {
+    public function storeItems($labor, $boleta, $turno) {
         // Articulo 1 Anfo
         $this->newDetalleBoleta(
             $boleta->id,
-            $cuenta,
-            $centro,
-            $subCentro,
+            $turno,
             1010,
             $labor->cantidadAnfo
         );
         // Articulo 2, Dinamita
         $this->newDetalleBoleta(
             $boleta->id,
-            $cuenta,
-            $centro,
-            $subCentro,
+            $turno,
             1020,
             $labor->nroTaladros
         );
         // Articulo 3, MS (tub+caps detonante)
         $this->newDetalleBoleta(
             $boleta->id,
-            $cuenta,
-            $centro,
-            $subCentro,
+            $turno,
             1030,
             4
         );
         // Articulo 4, LP (tub+caps detonante)
         $this->newDetalleBoleta(
             $boleta->id,
-            $cuenta,
-            $centro,
-            $subCentro,
+            $turno,
             1040,
             $labor->nroTaladros - 4
         );
         // Articulo 5, cordon detonante
         $this->newDetalleBoleta(
             $boleta->id,
-            $cuenta,
-            $centro,
-            $subCentro,
+            $turno,
             1050,
             6
         );
         // Articulo 6, Guia
         $this->newDetalleBoleta(
             $boleta->id,
-            $cuenta,
-            $centro,
-            $subCentro,
+            $turno,
             1060,
             4
         );
         // Articulo 5, cordon detonante
         $this->newDetalleBoleta(
             $boleta->id,
-            $cuenta,
-            $centro,
-            $subCentro,
+            $turno,
             1070,
             2
         );
     }
 
-    public function newDetalleBoleta($boleta_id, $cuenta, $centro, $subCentro, $codigoArticulo, $cantidadSolicitada) {
+    public function newDetalleBoleta($boleta_id, $turno,$codigoArticulo, $cantidadSolicitada) {
         $articulo = Articulo::where('nroArticulo', '=', $codigoArticulo)->first();
 
         $detalleBoleta = new DetalleBoleta();
         $detalleBoleta->boleta_id = $boleta_id;
-        $detalleBoleta->cuenta = $cuenta;
-        $detalleBoleta->centro = $centro;
-        $detalleBoleta->subCentro = $subCentro;
+        $detalleBoleta->turno = $turno;
         $detalleBoleta->codigoArticulo = $articulo->nroArticulo;
         $detalleBoleta->descripcionArticulo = $articulo->descripcion;
         $detalleBoleta->cantidadSolicitada = $cantidadSolicitada;
@@ -217,8 +196,7 @@ class BoletaController extends Controller
     {
         $boleta_id = $request->get('boleta_id');
         $boleta = Boleta::find($boleta_id);
-        $boleta->estado = 'Entregado';
-        $boleta->save();
+        
         $this->updateArticulo($boleta_id, 1010, $request->get('1010'));
         $this->updateArticulo($boleta_id, 1020, $request->get('1020'));
         $this->updateArticulo($boleta_id, 1030, $request->get('1030'));
@@ -226,18 +204,18 @@ class BoletaController extends Controller
         $this->updateArticulo($boleta_id, 1050, $request->get('1050'));
         $this->updateArticulo($boleta_id, 1060, $request->get('1060'));
         $this->updateArticulo($boleta_id, 1070, $request->get('1070'));
-
+        $boleta->estado = 'Entregado';
+        $boleta->save();
         return redirect()->route('bolsearch')->with('status', 'Boleta entregada correctamente');
     }
 
     public function updateArticulo($boleta_id, $articulo_id, $cantidadEntregada) {
-        $articulo = Articulo::find($articulo_id);
-        $detalleBoleta = DetalleBoleta::where('boleta_id', '=', $boleta_id)->where('codigoArticulo', '=', $articulo_id);
-        return $detalleBoleta;
+        $articulo = Articulo::where('nroArticulo', $articulo_id)->first();
+        $detalleBoleta = DetalleBoleta::where('boleta_id', '=', $boleta_id)->where('codigoArticulo', '=', $articulo_id)->first();
         if ($detalleBoleta->cantidadEntregada != $cantidadEntregada) {
             $detalleBoleta->cantidadEntregada = $cantidadEntregada;
             $detalleBoleta->precio = $detalleBoleta->cantidadEntregada*$articulo->precioVenta;
-            $detalleBoleta->diferenciaPrecio = $detalleBoleta->precio - $detalleBoleta->precioEstimado;
+            $detalleBoleta->diferenciaPrecio = round($detalleBoleta->precio - $detalleBoleta->precioEstimado, 2);
             $detalleBoleta->diferenciaCantidad = $detalleBoleta->cantidadEntregada - $detalleBoleta->cantidadSolicitada;
             $detalleBoleta->save();
         }

@@ -42,6 +42,7 @@
 						<thead>
 							<tr>
 								<th>Código</th>
+								<th>Turno</th>
 								<th>Asignado a:</th>
 								<th>Estado</th>
 								@if (Auth::user()->role == 'Polvorinero')
@@ -53,6 +54,7 @@
 							@foreach ($boletas as $boleta)
 								<tr>
 									<td>{{ $boleta->codigo }}</td>
+									<td>{{ $boleta->turno }}</td>
 									<td>{{ $boleta->recibidoPor }}</td>
 									<td>{{ $boleta->estado }}</td>
 									@if (Auth::user()->role == 'Polvorinero')

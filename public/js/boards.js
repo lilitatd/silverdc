@@ -1,6 +1,6 @@
 
 $(document).ready(function() {
-    $('#planeaciones, #planeacion_lbrs, #pendientes_aprb, #ver_lbrs, #list_blts, #users').DataTable({
+    $('#planeaciones, #pendientes_aprb, #ver_lbrs, #list_blts, #users').DataTable({
         "scrollX": true,
         "scrollCollapse": true,
     "lengthMenu": [[5,10, 25, 50, -1], [5,10, 25, 50, "TODOS"]],

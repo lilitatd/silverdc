@@ -50,6 +50,7 @@
             <tbody>
             @php $x=0; $total = 0; 
                 $lastType = 'A';
+                $totalGral = 0;
             @endphp
             @foreach($labors as $item)
                 @php 
@@ -58,18 +59,17 @@
                         $lastType = $item->tipo;
                     }
                     if ($lastType != $item->tipo) {
-                        echo "<tr>";
-                        echo '<td colspan="6">Total</td>';
-                        echo '<td style="display: none;"></td>';
-                        echo '<td style="display: none;"></td>';
-                        echo '<td style="display: none;"></td>';
-                        echo '<td style="display: none;"></td>';
-                        echo '<td style="display: none;"></td>';
-                        echo '<td>'.$total.'</td>';
-                        echo "</tr>";
+                        echo '<thead class="thead-light">';
+                        echo '<tr>';
+                        echo '<th colspan="6">Total labores tipo <strong>'.$lastType.'</strong></th>';
+                        echo '<th align="right">'.number_format($total, 2).'</th>';
+                        echo '</tr>';
+                        echo '</thead>';
                         $total = 0;
+                        $lastType = $item->tipo;
                     }
                     $total += $item->avanceTotal;
+                    $totalGral += $item->avanceTotal;
                 @endphp
                 <tr>
                     <td>{{ $x }}</td>
@@ -78,21 +78,24 @@
                     <td>{{ $item->veta }}</td>
                     <td>{{ $item->codigo }}</td>
                     <td>{{ $item->ejecutor }}</td>
-                    <td>{{ $item->avanceTotal }}</td>
+                    <td>{{ number_format($item->avanceTotal, 2) }}</td>
                 </tr>
             @endforeach
             @php 
-                echo "<tr>";
-                echo '<td colspan="6">Total</td>';
-                echo '<td style="display: none;"></td>';
-                echo '<td style="display: none;"></td>';
-                echo '<td style="display: none;"></td>';
-                echo '<td style="display: none;"></td>';
-                echo '<td style="display: none;"></td>';
-                echo '<td>'.$total.'</td>';
-                echo "</tr>";
+                echo '<thead class="thead-light">';
+                echo '<tr>';
+                echo '<th colspan="6">Total labores tipo <strong>'.$lastType.'</strong></th>';
+                echo '<th>'.number_format($total, 2).'</th>';
+                echo '</tr>';
+                echo '</thead>';
             @endphp
             </tbody>
+            <tfoot class="table-dark">
+                <tr>
+                    <td colspan="6"><strong>TOTAL GENERAL</strong></td>
+                    <td><strong>{{ number_format($totalGral,2) }}</strong></td>
+                </tr>
+            </tfoot>
         </table>
         
     </div>

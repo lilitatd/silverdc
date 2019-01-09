@@ -36,8 +36,8 @@
 							<td>{{$planeacion->mes}}</td>
 							<td>
 								@if ($planeacion->estado == "Revision")
-								<a href="/seccional/{{$planeacion->id}}" class="" style="color: black;"><span class="fa fa-eye"></span></a>
-								<a href="/seccional/{{$planeacion->id}}/aprobar" class="" style="color: green;"><span class="fa fa-check"></span></a>
+								<a href="/seccional/{{$planeacion->id}}" class="" style="color: black;" title="Ver planeación"><span class="fa fa-eye"></span></a>
+								<a href="/seccional/{{$planeacion->id}}/aprobar" class="" style="color: green;" title="Aprobar planeación" onclick="return confirm('¿Está seguro de aprobar la planeación?')"><span class="fa fa-check"></span></a>
 								@endif
 							</td>
 						</tr>

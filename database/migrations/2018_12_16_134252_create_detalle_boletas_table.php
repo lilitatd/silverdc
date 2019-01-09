@@ -16,9 +16,7 @@ class CreateDetalleBoletasTable extends Migration
         Schema::create('detalle_boletas', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('boleta_id')->unsigned();
-            $table->string('cuenta');
-            $table->string('centro');
-            $table->string('subCentro');
+            $table->string('turno');
             $table->string('codigoArticulo');
             $table->string('descripcionArticulo');
             $table->integer('cantidadSolicitada');
@@ -26,8 +24,8 @@ class CreateDetalleBoletasTable extends Migration
             $table->float('precioEstimado');
             $table->float('precio');
             $table->integer('diferenciaCantidad');
-            $table->float('diferenciaPrecio');  
-            $table->string('estado');          
+            $table->float('diferenciaPrecio');
+            $table->string('estado');
             $table->timestamps();
             $table->foreign('boleta_id')->references('id')->on('boletas')->onDelete('cascade');
         });

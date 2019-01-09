@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="text-center">
-        <h1>Entrega de boletas</h1>
+        <h1>Entrega de material</h1>
     </div>
     <div class="container">        
         <div class="row">
@@ -10,20 +10,10 @@
             <div class="col">{{ $boleta->codigo }}</div>
             <div class="col">Fecha</div>
             <div class="col">{{ $boleta->fecha }}</div>
-            <div class="col">Destino</div>
-            <div class="col">{{ $boleta->destino }}</div>
+            <div class="col">turno</div>
+            <div class="col">{{ $boleta->turno }}</div>
         </div>
         <div class="row">
-            <div class="col">Ficha</div>
-            <div class="col">{{ $boleta->ficha }}</div>
-            <div class="col">Uso</div>
-            <div class="col">{{ $boleta->uso }}</div>
-            <div class="col">equipo</div>
-            <div class="col">{{ $boleta->equipo }}</div>
-        </div>
-        <div class="row">
-            <div class="col">Número SHP</div>
-            <div class="col">{{ $boleta->numeroSHP }}</div>
             <div class="col">Asignado a</div>
             <div class="col">{{ $boleta->recibidoPor }}</div>
         </div>
@@ -33,13 +23,13 @@
         'route' => 'bolsave', 
         'method' => 'POST'
     ]) }}
-    <table class="table-bordered">
+    <table class="table table-striped">
         <thead>
             <tr>
                 <th>Código</th>
                 <th>Descripción</th>
-                <th>Cant. Sol.</th>
-                <th>Cant. Ent.</th>
+                <th>Cant. Solicitada</th>
+                <th>Cant. Entregada</th>
             </tr>
         </thead>
         <tbody>

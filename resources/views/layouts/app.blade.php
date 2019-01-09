@@ -53,6 +53,9 @@
                                 <li class="nav-item">
                                     <a class="link-nav-item nav-link" href="/boletas">BOLETAS</a>
                                 </li>
+                                <li class="nav-item">
+                                    <a class="link-nav-item nav-link" href="/reporte">REPORTES</a>
+                                </li>
                             @endif
                             @if (Auth::user()->role == 'Seccional')
                                 <li class="nav-item">

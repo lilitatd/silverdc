@@ -68,6 +68,13 @@ Route::post('/users/create', 'UserController@store')->name('users.store');
 Route::get('/users/{id}/edit', 'UserController@show');
 Route::put('/users/{id}/edit', 'UserController@update')->name('users.update');*/
 
+/*
+ * -------------------------
+ * 		Reporte
+ * -------------------------
+ */
+Route::get('/reporte', 'ReporteController@index')->name('repsearch');
+
 // Rutas para la creacion de labor
 Route::get('labors/create-step1/{planeacion_id}', [
     'as' => 'createlabors',

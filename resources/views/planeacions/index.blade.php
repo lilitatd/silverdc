@@ -46,8 +46,8 @@
 					<td>{{$planeacion->mes}}</td>
 					<td>
 						@if ($planeacion->estado == "Pendiente")
- 						<a href="/planeacions/{{$planeacion->id}}" class="" style="color: black;"><span class="fa fa-eye"></span></a>
-						<a href="/planeacions/{{$planeacion->id}}/edit" class="" style="color: blue;"><span class="fa fa-pencil"> </span></a>
+ 						<a href="/planeacions/{{$planeacion->id}}" class="" style="color: black;" title="Ver y agregar labores"><span class="fa fa-eye"></span></a>
+						<a href="/planeacions/{{$planeacion->id}}/edit" class="" style="color: blue;"><span class="fa fa-pencil" title="Editar"> </span></a>
 						{!! Form::open([
 							'route' => ['planeacions.destroy', $planeacion->id], 
 							'method' => 'DELETE', 
@@ -61,11 +61,11 @@
 						,'style'=>'visibility: hidden;','id'=>'el_p']) !!} -->
 						{!! Form::close() !!}
 						
-						<a href="#" class="" onclick="$('#form_1').submit();" style="color: red;"><span class="fa fa-trash"> </span></a>
-						<a href="/planeacions/{{$planeacion->id}}/revision" class="" style="color: green;"><span class="fa fa-check"></span></a>
+						<a href="#" class="" onclick="$('#form_1').submit();" style="color: red;"><span class="fa fa-trash" title="Eliminar"> </span></a>
+						<a href="/planeacions/{{$planeacion->id}}/revision" class="" style="color: green;" title="Mandar a revisión"><span class="fa fa-check"></span></a>
 						@endif
 						@if ($planeacion->estado == 'Aprobado')
-							<a href="/planeacions/{{$planeacion->id}}/boleta" class="" style="color: black;" ><span class="fa fa-list-ul"></span></a>
+							<a href="/planeacions/{{$planeacion->id}}/boleta" class="" style="color: black;" title="Crear boleta"><span class="fa fa-list-ul"></span></a>
 						@endif
 					</td>
 				</tr>
