@@ -4,21 +4,34 @@ namespace SilverDC\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Maatwebsite\Excel\Facades\Excel;
+use SilverDC\Exports\PreciosExport;
 use SilverDC\Boleta;
 use SilverDC\DetalleBoleta;
 use SilverDC\Labor;
 use SilverDC\Planeacion;
+use PDF;
 
 class ReporteController extends Controller
 {
+    public function pdf() {
+        $auxDetalleBoletas = & $this->globalAuxDetalleBoletas;
+        $auxDetalleBoletas =  session('auxValue');
+        $pdf = PDF::loadView('reports.table', compact('auxDetalleBoletas'));
+
+        return $pdf->stream();
+    }
+
+    public function downExcel() {
+        return Excel::download(new PreciosExport, 'precios.xlsx');
+    }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
-    {
-        
+    {        
         $dateFrom = Carbon::today();
         $dateTo = Carbon::today();
         if (count($request->all()) > 0) {
@@ -30,9 +43,9 @@ class ReporteController extends Controller
             $dateTo = $request->input('dateTo');
         }
         $boletasIds = Boleta::select('id')->where('estado', 'Entregado')->whereBetween('fecha', array($dateFrom, $dateTo))->pluck('id');
-        $detalleBoletas = DetalleBoleta::whereIn('boleta_id', $boletasIds)->get();
+        $detalleBoletas = DetalleBoleta::whereIn('boleta_id', $boletasIds)->get();        
         $auxDetalleBoletas = $this->generateAuxDetalleBoletas($detalleBoletas);
-       // return $auxDetalleBoletas;
+        session(['auxValue' => $auxDetalleBoletas]);
         return view('reports.index', compact('auxDetalleBoletas'));
     }
 

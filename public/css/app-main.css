@@ -776,6 +776,110 @@ span.fa.fa-user:after{
 }
 
 /* ************************************************ */
+.hero-element{
+    background-position:center;
+    background-size:cover;
+    position:relative;
+    background-repeat:no-repeat;
+    text-align:center;
+    height:40vw;
+    max-height:680px;
+    min-height:350px;
+    color:#fff
+}
+.hero-element::before{
+    content:'';
+    display:block;
+    position:absolute;
+    width:100%;
+    height:100%;
+    top:0;
+    left:0;
+    background:rgba(0,0,0,0.4)
+}
+.hero-element .black{
+    color:#000
+}
+.hero-element .dark_grey{
+    color:#666
+}
+.hero-element .light_grey{
+    color:#E8E8E8
+}
+.hero-element .orange{
+    color:#F36621
+}
+.hero-element .blue{
+    color:#0076B3
+}
+.hero-element .dark_blue{
+    color:#163F53
+}
+.hero-element .hero-content{
+    position:absolute;
+    left:0;top:50%;
+    -webkit-transform:translateY(-50%);
+    -ms-transform:translateY(-50%);
+    transform:translateY(-50%);
+    width:100%;
+    padding:0 1rem
+}
+.hero-element .hero-title,.hero-element .hero-subtitle{
+    padding:0;
+    line-height:1
+}
+.hero-element .hero-title{
+    font-size:calc(2rem + 3vw);
+    text-transform:uppercase;
+    margin:0
+}
+.hero-element .hero-subtitle{
+    font-family:"Asap",sans-serif;
+    font-size:calc(1.5rem + 1vw);
+    margin:2rem 0 2.7rem;
+    font-weight:400
+}
+.hero-element .hero-stats{
+    margin:0 auto;padding:0;
+    list-style-type:none;
+    display:-webkit-box;
+    display:-ms-flexbox;
+    display:flex;
+    -ms-flex-wrap:wrap;
+    flex-wrap:wrap;
+    -webkit-box-pack:justify;
+    -ms-flex-pack:justify;
+    justify-content:space-between;
+    max-width:900px;
+    font-family:"Oswald",sans-serif;
+    font-size:calc(1.2rem + .6vw);
+    text-transform:uppercase
+}
+.hero-element .hero-stats li{
+    padding:2rem 1rem 0;
+    -webkit-box-flex:1;
+    -ms-flex:1 0 0px;
+    flex:1 0 0;
+    width:33.33%;
+    min-width:130px
+}
+.hero-element .hero-stats .stat-num{
+    font-size:200%;display:block
+}
+.hero-element .hero-disclaimer{
+    font-style:italic;
+    font-weight:lighter;
+    display:block;
+    bottom:0;
+    text-align:center;
+    width:100%
+}
+.hero-element .hero-disclaimer a{
+    color:#fff
+}
+.hero-element .hero-disclaimer a:hover{
+    text-decoration:underline
+}
 .hero-element-mini {
     background: #0076B3 url(../images/topo-map.png) 0 0;
     position: relative;
@@ -789,4 +893,35 @@ span.fa.fa-user:after{
     align-items: center;
     -ms-flex-line-pack: center;
     align-content: center;
+}
+
+.hero-element-mini .hero-title{
+    margin:0;
+    padding:0;
+}
+.hero-copy {
+    float:left;
+}
+@media screen and (min-width: 50em){
+    .hero-element-mini .row-wrap{
+        display:-webkit-box;
+        display:-ms-flexbox;
+        display:flex;
+        -webkit-box-align:center;
+        -ms-flex-align:center;
+        align-items:center;
+        -ms-flex-line-pack:center;
+        align-content:center;
+        width:100%
+    }
+    .hero-element-mini .hero-title{
+        margin:0 6rem 0 0;
+        width:45%
+    }
+    .hero-element-mini .hero-copy{
+        width:55%
+    }
+    .hero-copy {
+        display:flex;
+    }
 }

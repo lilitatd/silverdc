@@ -10,12 +10,16 @@
 		</div>
 	@else
 		<div class="container">
-			
+			<div class="row">
+				<div class="col-sm-12 col-md-12">
+					<div class="hero-element-mini">
+						<h1 class="hero-title white">Lista de boletas
+						</h1>
+					</div>
+				</div>
+			</div>
 					<!-- <div class="page-header"> -->
 						<div class="row justify-content-sm-center d-flex">
-							<div class="col-md-5 col-sm-12">
-								<h1>Lista de boletas</h1>
-							</div>
 							<div class="col-md-7 col-sm-12">
 							{{ Form::open([
 								'route' => 'bolsearch', 

@@ -1,8 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>Cálculo del número de taladros: {{ $planeacion->id }}</h1>
-    <hr>
+    <div class="row">
+        <div class="col-sm-12 col-md-12">
+            <div class="hero-element-mini">
+            <h1 class="hero-title white">Nueva labor - paso 2
+            </h1>
+            </div>
+        </div>
+    </div>
     <div class="container">
         <div class="row">
             <div class="col-sm">

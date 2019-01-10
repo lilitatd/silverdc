@@ -3,6 +3,14 @@
 @section('title', '- Planeación')
 
 @section('content')
+    <div class="row">
+        <div class="col-sm-12 col-md-12">
+            <div class="hero-element-mini">
+            <h1 class="hero-title white">Planeación - Añadir labores
+            </h1>
+            </div>
+        </div>
+    </div>
 	@include('common.success')
     <br>
 	<table class="table table-bordered">

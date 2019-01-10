@@ -1,13 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
-    <br>
     <div class="row">
-        <div class="col">
-            <h1 class="text-center">Cálculo del número de taladros: {{ $planeacion->id }}</h1>
+        <div class="col-sm-12 col-md-12">
+            <div class="hero-element-mini">
+            <h1 class="hero-title white">Nueva labor
+            </h1>
+            </div>
         </div>
     </div>
-    <hr>
     @include('common.errors')
     {!! Form::open([
         'url' => '/labors/create-step1',

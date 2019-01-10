@@ -1,8 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="text-center">
-        <h1>Crear nueva boleta</h1>
+    <div class="row">
+        <div class="col-sm-12 col-md-12">
+            <div class="hero-element-mini">
+            <h1 class="hero-title white">Crear nueva boleta
+            </h1>
+            </div>
+        </div>
     </div>
     {!!Form::open(['route' => ['boletas.store'],
         'method' => 'POST']) !!}

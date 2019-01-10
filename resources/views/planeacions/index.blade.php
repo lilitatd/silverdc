@@ -8,7 +8,10 @@
 		<br>
 		<div class="row">
 			<div class="col-sm-12 col-md-12">
-				<h1 class="text-center">LISTA DE PLANEACIONES</h1>
+				<div class="hero-element-mini">
+				<h1 class="hero-title white">Lista de planeaciones
+				</h1>
+				</div>
 			</div>
 		</div>
 		<!-- <div class="text-right"><a href="/planeacions/create" class="w3-button w3-circle w3-black">+</a></div> -->

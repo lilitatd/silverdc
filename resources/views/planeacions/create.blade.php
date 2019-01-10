@@ -3,6 +3,14 @@
 @section('title', ' - Planeaciones')
 
 @section('content')
+	<div class="row">
+		<div class="col-sm-12 col-md-12">
+			<div class="hero-element-mini">
+			<h1 class="hero-title white">Crear planeación
+			</h1>
+			</div>
+		</div>
+	</div>
 	@include('common.errors')
 	<br>
 	{!! Form::open(['route' => 'planeacions.store', 'method' => 'POST']) !!}

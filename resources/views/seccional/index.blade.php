@@ -6,9 +6,13 @@
 	<br>
 	@include('common.success')
 	@if (count($planeaciones) > 0)
-		<div class="text-center"><h1>LISTA DE PLANEACIONES</h1>
-			<br>
-			<h2>PENDIENTES DE APROBACION</h2>
+		<div class="hero-element-mini">
+			<div class="row-wrap">
+				
+				<h1 class="hero-title white">Lista de planeaciones
+				</h1>
+				<p class="hero-copy white">pendientes de aprobación</p>
+			</div>
 		</div>
 
 		<div class="row">

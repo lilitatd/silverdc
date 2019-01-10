@@ -73,7 +73,9 @@ Route::put('/users/{id}/edit', 'UserController@update')->name('users.update');*/
  * 		Reporte
  * -------------------------
  */
-Route::get('/reporte', 'ReporteController@index')->name('repsearch');
+Route::get('/reporte', 'ReporteController@index')->name('repsearch')->middleware('auth');
+Route::get('/pdf', 'ReporteController@pdf')->name('pdf');
+Route::get('/downexcel', 'ReporteController@downexcel')->name('downexcel');
 
 // Rutas para la creacion de labor
 Route::get('labors/create-step1/{planeacion_id}', [

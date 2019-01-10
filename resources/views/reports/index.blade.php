@@ -3,7 +3,14 @@
 @section('title', ' - Reporte')
 
 @section('content')
-	<div class="text-center">--Reporte por precios --</div>
+	<div class="row">
+		<div class="col-sm-12 col-md-12">
+			<div class="hero-element-mini">
+			<h1 class="hero-title white">Reporte por precios
+			</h1>
+			</div>
+		</div>
+	</div>
 	@include('common.errors')
 	<div class="row">
 		{{ Form::open ([
@@ -31,6 +38,15 @@
 				</div>				
 			</div>
 		{{ Form::close() }}
+	</div>
+	@if (count($auxDetalleBoletas) > 0)
+	<div class="row">
+		<div class="col">
+			<a href="downexcel">Excel</a>
+		</div>
+		<div class="col">
+			<a href="pdf">PDF</a>
+		</div>
 	</div>
 	<table class="table table-striped">
 		<thead>
@@ -73,16 +89,20 @@
 				@endphp
 			@endforeach
 		</tbody>
-		<tfoot>
+		<tfoot class="thead-light">
 			<tr>
-				<th>Total</th>
+				<th colspan="7">TOTAL</th>
 				<th>{{ $sumPrecioEstimado }}</th>
 				<th>{{ $sumPrecio }}</th>
 				<th>{{ $sumDiferencia }}</th>
 			</tr>
 		</tfoot>
 	</table>
-	fdsafsa
+	@else
+	<div class="text-center">			
+		<p>No existen registros en el intervalo seleccionado</p>
+	</div>
+	@endif
 @endsection
 
 <script type="text/javascript">
