@@ -103,7 +103,7 @@ class LaborController extends Controller
         $labor->nroTaladros = $auxValues['nroTaladros'];
         $labor->avance = round($auxValues['avance'], 2);
         $labor->avanceTotal = round($auxValues['avanceTotal'], 2);
-        $labor->cantidadAnfo = round($auxValues['cantidadAnfo'], 2);
+        $labor->cantidadAnfo = ceil($auxValues['cantidadAnfo']);
         
         $request->session()->put('labor', $labor);
         return view('/labors.create-step2', compact('labor', 'auxValues', 'planeacion'));
