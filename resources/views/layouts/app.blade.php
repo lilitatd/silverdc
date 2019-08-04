@@ -90,9 +90,9 @@
         </header>
         <!-- </div> -->
 
-    </div>
+    
 
-    <div id="sidr-main" class="sidr right sidr-vsb" style="transition: right 0.2s ease 0s; right: 0px;">
+        <div id="sidr-main" class="sidr right sidr-vsb" style="transition: right 0.2s ease 0s; right: 0px;">
            <div class="sidr-inner">
               <ul class="sidr-class-nav-items">
                  <li class="sidr-class-nav-item sidr-class-dropdown sidr-class-link">
@@ -122,17 +122,22 @@
         </div>
 
         @endguest
+    </div>
         <main class="container">
+            <div>
+                
             @yield('content')
+            </div>
         </main>
     <!-- </div> -->
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js" defer></script>
-    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js" defer></script>
-    <script src="{{ asset('js/boards.js') }}" defer></script>
-    <script src="{{ asset('js/app-main.js') }}" defer></script>
-
+    
+    <div>test</div>
 </body>
 </html>
+<!-- Scripts -->
+<script src="{{ asset('js/app.js') }}" defer></script>
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js" defer></script>
+<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js" defer></script>
+<script src="{{ asset('js/boards.js') }}" defer></script>
+<script src="{{ asset('js/app-main.js') }}" defer></script>
