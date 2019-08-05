@@ -53,7 +53,7 @@ Route::post('/boletas/create/{id}', 'BoletaController@createAll');
 Route::post('/pol/boletas', 'BoletaController@update')->name('bolsave');
 
 Auth::routes();
-Route::get('/home', 'HomeController@index')->name('home');
+//Route::get('/home', 'HomeController@index')->name('home');
 
 /*
  * -------------------------
