@@ -106,6 +106,11 @@
                     </div>
                  </li>
                  <li class="sidr-class-nav-item sidr-class-dropdown sidr-class-link">
+                    <a class="sidr-class-nav-link" href="/reporte" aria-expanded="false">Reportes</a>
+                    <div class="sidr-class-dropdown-holder">
+                    </div>
+                 </li>
+                 <li class="sidr-class-nav-item sidr-class-dropdown sidr-class-link">
                     <a class="sidr-class-nav-link" href="#" aria-expanded="false">{{ Auth::user()->name }}<!-- <span class="fa fa-user" style="width: 20px; margin: 0px !important;"></span> --></a>
                     <div class="sidr-class-dropdown-holder">
                        <ul class="sidr-class-dropdown-menu">
