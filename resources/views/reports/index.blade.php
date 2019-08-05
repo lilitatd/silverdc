@@ -21,13 +21,13 @@
 			<div class="col">
 				<div class="form-group">
 					{!! Form::label('dateFrom', 'Desde') !!}
-					{{ Form::date('dateFrom', \Carbon\Carbon::now(), ['class' => 'form-control', 'id'=>'datetimepicker']) }}				
+					{{ Form::date('dateFrom', \Carbon\Carbon::now(), ['class' => 'form-control', 'id'=>'dateFrom']) }}				
 				</div>				
 			</div>
 			<div class="col">
 				<div class="form-group">
 					{!! Form::label('dateTo', 'Hasta') !!}
-					{{ Form::date('dateTo', \Carbon\Carbon::now(), ['class' => 'form-control', 'id'=>'datetimepicker']) }}				
+					{{ Form::date('dateTo', \Carbon\Carbon::now(), ['class' => 'form-control', 'id'=>'dateTo']) }}				
 				</div>				
 			</div>
 			<div class="col">
@@ -104,9 +104,3 @@
 	</div>
 	@endif
 @endsection
-
-<script type="text/javascript">
-	$('#datetimepicker').datetimepicker({
-    	format: 'yyyy-mm-dd'
-	});
-</script>
