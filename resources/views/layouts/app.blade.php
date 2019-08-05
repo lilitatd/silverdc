@@ -129,9 +129,6 @@
             @yield('content')
             </div>
         </main>
-    <!-- </div> -->
-    
-    <div>test</div>
 </body>
 </html>
 <!-- Scripts -->
