@@ -114,3 +114,12 @@ Route::get('/test', function() {
 
 	return $planeacion->labors;*/
 });
+
+Route::get('/migrate', function() {
+    Log::info('Display this on the screen');
+    Artisan::call('migrate:refresh');
+    Log::info('Display this on the screen');
+    // Fill tables with seeds
+    Artisan::call('db:seed'); 
+    Log::info('Display this on the screen');
+});
